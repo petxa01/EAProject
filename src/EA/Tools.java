@@ -19,7 +19,7 @@ public class Tools {
         return null;
 
     }
-    public static ArrayList<Object> returnObjects(ArrayList<Object> objectList, boolean exist) {
+    public static ArrayList<Object> returnObjectList(ArrayList<Object> objectList, boolean exist) {
         if (exist)
             return objectList;
         else

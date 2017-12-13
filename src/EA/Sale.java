@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-import static EA.Tools.returnObjects;
+import static EA.Tools.returnObjectList;
 
 public class Sale {
     int id;
@@ -87,7 +87,7 @@ public class Sale {
         } catch (SQLException ex) {
             System.out.println("SQL EXCEPTION");
         }
-        return returnObjects(objectList, exist);
+        return returnObjectList(objectList, exist);
     }
 
 }

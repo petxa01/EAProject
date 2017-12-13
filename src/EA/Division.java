@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static EA.Tools.returnObjects;
+import static EA.Tools.returnObjectList;
 
 public class Division {
     private int id;
@@ -51,7 +51,7 @@ public class Division {
         } catch (SQLException ex) {
             System.out.println("SQL EXCEPTION");
         }
-        return returnObjects(objectList, exist);
+        return returnObjectList(objectList, exist);
     }
 
 }

@@ -1,7 +1,5 @@
 package EA;
 
-import java.lang.reflect.Array;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -85,7 +83,7 @@ public class Client {
         } catch (SQLException ex) {
             System.out.println("SQL EXCEPTION");
         }
-        return returnObjects(objectList, exist);
+        return returnObjectList(objectList, exist);
     }
 
 
