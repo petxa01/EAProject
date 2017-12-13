@@ -1,12 +1,18 @@
 package EA;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import static EA.Tools.returnObjects;
+
 public class Studio {
     private int id;
     private String name;
     private String country;
     private int divisionId;
 
-    public Studio() {
+    public Studio(int i, String string, int parseInt) {
     }
 
     public Studio(int id, String name, String country, int divisionId) {
@@ -46,5 +52,27 @@ public class Studio {
 
     public void setDivisionId(int divisionId) {
         this.divisionId = divisionId;
+    }
+
+    public static ArrayList<Object> selectStudios(ArrayList<Object> objectList, ResultSet res, boolean exist) {
+        try {
+
+            while (res.next()) {
+                exist = true;
+                Studio studio = new Studio(
+                        Integer.parseInt(res.getString(1)),
+                        res.getString(2),
+                        res.getString(3),
+                        Integer.parseInt(res.getString(4))
+                );
+
+                objectList.add(studio);
+
+            }
+            res.close();
+        } catch (SQLException ex) {
+            System.out.println("SQL EXCEPTION");
+        }
+        return returnObjects(objectList, exist);
     }
 }

@@ -1,5 +1,11 @@
 package EA;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import static EA.Tools.returnObjects;
+
 public class Franchise {
     int id;
     String name;
@@ -36,5 +42,25 @@ public class Franchise {
 
     public void setStudioId(int studioId) {
         this.studioId = studioId;
+    }
+    public static ArrayList<Object> selectFranchises(ArrayList<Object> objectList, ResultSet res, boolean exist) {
+        try {
+
+            while (res.next()) {
+                exist = true;
+                Studio studio = new Studio(
+                        Integer.parseInt(res.getString(1)),
+                        res.getString(2),
+                        Integer.parseInt(res.getString(3))
+                );
+
+                objectList.add(studio);
+
+            }
+            res.close();
+        } catch (SQLException ex) {
+            System.out.println("SQL EXCEPTION");
+        }
+        return returnObjects(objectList, exist);
     }
 }

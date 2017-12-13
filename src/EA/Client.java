@@ -66,7 +66,7 @@ public class Client {
      * @param exist comprobacion de si el result no esta vacio
      * @return devuelve los resultados en un arrayList de objetos es null si el result esta vacio
      */
-    public static ArrayList<Object> clientsSelect(ArrayList<Object> objectList, ResultSet res, boolean exist) {
+    public static ArrayList<Object> selectClients(ArrayList<Object> objectList, ResultSet res, boolean exist) {
         try {
 
             while (res.next()) {

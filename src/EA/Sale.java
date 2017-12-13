@@ -1,6 +1,13 @@
 package EA;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
+import static EA.Tools.returnObjects;
 
 public class Sale {
     int id;
@@ -59,4 +66,28 @@ public class Sale {
     public void setClientId(int clientId) {
         this.clientId = clientId;
     }
+
+    public static ArrayList<Object> selectSales(ArrayList<Object> objectList, ResultSet res, boolean exist) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("y M d", Locale.ENGLISH);
+            while (res.next()) {
+                exist = true;
+                Sale sale = new Sale(
+                        Integer.parseInt(res.getString(1)),
+                        Integer.parseInt(res.getString(2)),
+                        LocalDate.parse(res.getString(3), formatter),
+                        Integer.parseInt(res.getString(4)),
+                        Integer.parseInt(res.getString(5))
+                );
+
+                objectList.add(sale);
+
+            }
+            res.close();
+        } catch (SQLException ex) {
+            System.out.println("SQL EXCEPTION");
+        }
+        return returnObjects(objectList, exist);
+    }
+
 }
