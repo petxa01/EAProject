@@ -1,5 +1,11 @@
 package EA;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import static EA.Tools.returnObjects;
+
 public class Developer {
     private int id;
     private String idCard;
@@ -76,5 +82,29 @@ public class Developer {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public static ArrayList<Object> selectDevelopers(ArrayList<Object> objectList, ResultSet res, boolean exist) {
+        try {
+
+            while (res.next()) {
+                exist = true;
+                Developer developer = new Developer(
+                        Integer.parseInt(res.getString(1)),
+                        res.getString(2),
+                        res.getString(3),
+                        res.getString(4),
+                        Float.parseFloat(res.getString(5)),
+                        res.getString(6),
+                        res.getString(7)
+                );
+                objectList.add(developer);
+
+            }
+            res.close();
+        } catch (SQLException ex) {
+            System.out.println("SQL EXCEPTION");
+        }
+        return returnObjects(objectList, exist);
     }
 }

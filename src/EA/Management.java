@@ -1,16 +1,15 @@
 package EA;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static EA.Client.*;
 import static EA.Develop.*;
 import static EA.Tools.*;
+import static EA.Developer.*;
 
 public class Management {
     /**
-     *
      * @param table nombre de las tablas
      * @param field campo para comparar
      * @param value valor para comparar
@@ -25,8 +24,12 @@ public class Management {
             case "clients":
                 return clientsSelect(ObjectList, res, exist);
 
-            case "develop":
+            case "develops":
                 return selectDevelop(ObjectList, res, exist);
+
+            case "developers":
+                return selectDevelopers(ObjectList,res,exist);
+
 
         }
         return null;
