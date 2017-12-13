@@ -20,28 +20,6 @@ public class Develop {
         this.finished = finished;
     }
 
-    public static ArrayList<Develop> select() {
-        ArrayList<Develop> develops = new ArrayList<>();
-        ResultSet rs;
-        try {
-            rs = query("SELECT * FROM DEVELOPS");
-
-            while (rs.next()) {
-                Develop dev = new Develop(
-                        Integer.parseInt(rs.getString(1)),
-                        Integer.parseInt(rs.getString(2)),
-                        Boolean.parseBoolean(rs.getString(3))
-                ) {
-                };
-                develops.add(dev);
-
-            }
-            return develops;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public int getDeveloperId() {
         return developerId;
     }
@@ -64,5 +42,32 @@ public class Develop {
 
     public void setFinished(boolean finished) {
         this.finished = finished;
+    }
+    /**
+     *
+     * @param objectList ArrayList para devolver el valor
+     * @param res resultado del query
+     * @param exist comprobacion de si el result no esta vacio
+     * @return devuelve los resultados en un arrayList de objetos es null si el result esta vacio
+     */
+    public static ArrayList<Object> selectDevelop(ArrayList<Object> objectList, ResultSet res, boolean exist) {
+        try {
+
+            while (res.next()) {
+                exist = true;
+                Develop develop = new Develop(
+                        Integer.parseInt(res.getString(1)),
+                        Integer.parseInt(res.getString(2)),
+                        Boolean.parseBoolean(res.getString(3))
+                );
+
+                objectList.add(develop);
+
+            }
+            res.close();
+        } catch (SQLException ex) {
+            System.out.println("SQL EXCEPTION");
+        }
+        return returnObjects(objectList, exist);
     }
 }

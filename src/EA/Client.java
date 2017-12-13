@@ -11,7 +11,7 @@ import static EA.Tools.*;
 
 public class Client {
     private int id;
-    private String idCard;
+    private String idCard; //Añadir en la datubase
     private String name;
     private String category;
 
@@ -59,37 +59,34 @@ public class Client {
         this.id = id;
     }
 
-    public static ArrayList<Client> selectClient() {
-        ArrayList<Client> custList = new ArrayList();
-        ResultSet res = query("Select * From ea.Clients");
-        boolean exist = false;
+    /**
+     *
+     * @param objectList
+     * @param res resultado del query
+     * @param exist comprobacion de si el result no esta vacio
+     * @return devuelve los resultados en un arrayList de objetos es null si el result esta vacio
+     */
+    public static ArrayList<Object> clientsSelect(ArrayList<Object> objectList, ResultSet res, boolean exist) {
         try {
 
             while (res.next()) {
                 exist = true;
-                Client cust = new Client(
+                Client client = new Client(
                         Integer.parseInt(res.getString(1)),
+                        res.getString(2),
+                        res.getString(3),
+                        res.getString(4)
+                );
 
-                        );
-                cust.setNan(res.getString(1));
-                cust.setName(res.getString(2));
-                cust.setSurname1(res.getString(3));
-                cust.setSurname2(res.getString(4));
-                cust.setPhone(res.getInt(5));
-                cust.setEmail(res.getString(6));
-                cust.setGender(res.getString(7));
-                cust.setPayingMethod(res.getString(8));
-                custList.add(cust);
+                objectList.add(client);
 
             }
             res.close();
         } catch (SQLException ex) {
             System.out.println("SQL EXCEPTION");
         }
-        if (exist) {
-            return custList;
-        } else {
-            return null;
-        }
+        return returnObjects(objectList, exist);
     }
+
+
 }
