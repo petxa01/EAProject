@@ -12,7 +12,7 @@ public class Studio {
     private String country;
     private int divisionId;
 
-    public Studio(int i, String string, int parseInt) {
+    public Studio() {
     }
 
     public Studio(int id, String name, String country, int divisionId) {
