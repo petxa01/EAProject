@@ -45,12 +45,12 @@ public class Develop {
     }
     /**
      *
-     * @param objectList ArrayList para devolver el valor
      * @param res resultado del query
      * @param exist comprobacion de si el result no esta vacio
      * @return devuelve los resultados en un arrayList de objetos es null si el result esta vacio
      */
-    public static ArrayList<Object> selectDevelop(ArrayList<Object> objectList, ResultSet res, boolean exist) {
+    public static ArrayList<Object> selectDevelop(ResultSet res, boolean exist) {
+        ArrayList<Object> objectList = new ArrayList();
         try {
 
             while (res.next()) {

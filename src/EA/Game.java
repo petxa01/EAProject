@@ -65,7 +65,8 @@ public class Game {
         this.franchieId = franchieId;
     }
 
-    public static ArrayList<Object> selectGames(ArrayList<Object> objectList, ResultSet res, boolean exist) {
+    public static ArrayList<Object> selectGames(ResultSet res, boolean exist) {
+        ArrayList<Object> objectList = new ArrayList();
         try {
 
             while (res.next()) {

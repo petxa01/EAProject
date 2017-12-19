@@ -84,7 +84,8 @@ public class Developer {
         this.country = country;
     }
 
-    public static ArrayList<Object> selectDevelopers(ArrayList<Object> objectList, ResultSet res, boolean exist) {
+    public static ArrayList<Object> selectDevelopers(ResultSet res, boolean exist) {
+        ArrayList<Object> objectList = new ArrayList();
         try {
 
             while (res.next()) {

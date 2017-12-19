@@ -43,18 +43,19 @@ public class Franchise {
     public void setStudioId(int studioId) {
         this.studioId = studioId;
     }
-    public static ArrayList<Object> selectFranchises(ArrayList<Object> objectList, ResultSet res, boolean exist) {
+    public static ArrayList<Object> selectFranchises(ResultSet res, boolean exist) {
+        ArrayList<Object> objectList = new ArrayList();
         try {
 
             while (res.next()) {
                 exist = true;
-                Studio studio = new Studio(
+                Franchise franchise = new Franchise(
                         Integer.parseInt(res.getString(1)),
                         res.getString(2),
                         Integer.parseInt(res.getString(3))
                 );
 
-                objectList.add(studio);
+                objectList.add(franchise);
 
             }
             res.close();

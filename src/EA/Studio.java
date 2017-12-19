@@ -54,7 +54,8 @@ public class Studio {
         this.divisionId = divisionId;
     }
 
-    public static ArrayList<Object> selectStudios(ArrayList<Object> objectList, ResultSet res, boolean exist) {
+    public static ArrayList<Object> selectStudios(ResultSet res, boolean exist) {
+        ArrayList<Object> objectList = new ArrayList();
         try {
 
             while (res.next()) {

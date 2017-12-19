@@ -20,51 +20,62 @@ public class DBtools {
      * @param value valor para comparar
      * @return devuelve los resultados en un arrayList de objetos es null si el result esta vacio
      */
-    public static ArrayList<Object> Show(String table, String field, String value) {
+    public static ArrayList<Object> show(String table, String field, String value) {
         ArrayList<Object> objectList = new ArrayList();
         ResultSet res = query("Select * From ea." + table + " where " + field + "=" + value);
         boolean exist = false;
         table = table.toLowerCase();
-        objectList = selectTable(table,objectList,res,exist);
+        objectList = selectTable(table,res,exist);
         if (objectList != null) return objectList;
         return null;
     }
-
-    public static ArrayList<Object> Show(String table) {
+    /**
+     * @param table name of the requested table
+     * @return returns
+     */
+    public static ArrayList<Object> show(String table) {
         ArrayList<Object> objectList = new ArrayList();
         ResultSet res = query("Select * From ea." + table);
         boolean exist = false;
         table = table.toLowerCase();
-        objectList = selectTable(table,objectList,res,exist);
+        objectList = selectTable(table,res,exist);
         if (objectList != null) return objectList;
         return null;
     }
 
-    private static ArrayList<Object> selectTable(String table,ArrayList<Object> objectList, ResultSet res, boolean exist) {
+
+    /**
+     *
+     * @param table nombre de la tablas
+     * @param res
+     * @param exist
+     * @return ArrayList con el resultado del select
+     */
+    private static ArrayList<Object> selectTable(String table, ResultSet res, boolean exist) {
         switch (table) { //tabla es siempre en minusculas
             case "clients":
-                return selectClients(objectList, res, exist);
+                return selectClients(res, exist);
 
             case "develops":
-                return selectDevelop(objectList, res, exist);
+                return selectDevelop(res, exist);
 
             case "developers":
-                return selectDevelopers(objectList, res, exist);
+                return selectDevelopers( res, exist);
 
             case "studio":
-                return selectStudios(objectList, res, exist);
+                return selectStudios( res, exist);
 
             case "divisions":
-                return selectDivisions(objectList, res, exist);
+                return selectDivisions( res, exist);
 
             case "franchises":
-                return selectFranchises(objectList, res, exist);
+                return selectFranchises(res, exist);
 
             case "games":
-                return selectGames(objectList, res, exist);
+                return selectGames(res, exist);
 
             case "sales":
-                return selectSales(objectList, res, exist);
+                return selectSales(res, exist);
         }
         return null;
     }
