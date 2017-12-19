@@ -16,13 +16,12 @@ import static EA.Sale.*;
 public class DBtools {
     /**
      * @param table Table name
-     * @param field Field name
-     * @param value Value to compare with the field
+     * @param condition The condition to meet
      * @return ArrayList of the objects, returns null if empty
      */
-    public static ArrayList<Object> show(String table, String field, String value) {
+    public static ArrayList<Object> select(String table, String condition) {
         ArrayList<Object> objectList;
-        ResultSet res = sqlStmt("Select * From ea." + table + " where " + field + "=" + value,true);
+        ResultSet res = sqlStmt("Select * From ea." + table + " where " + condition,true);
         boolean exist = false;
         table = table.toLowerCase();
         objectList = selectTable(table,res,exist);
@@ -33,7 +32,7 @@ public class DBtools {
      * @param table name of the requested table
      * @return returns
      */
-    public static ArrayList<Object> show(String table) {
+    public static ArrayList<Object> select(String table) {
         ArrayList<Object> objectList;
         ResultSet res = sqlStmt("Select * From ea." + table,true);
         boolean exist = false;
