@@ -1,6 +1,9 @@
 package EA;
 
+import com.mysql.jdbc.PreparedStatement;
+
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static EA.Client.*;
@@ -22,7 +25,7 @@ public class DBtools {
      */
     public static ArrayList<Object> Show(String table, String field, String value) {
         ArrayList<Object> objectList = new ArrayList();
-        ResultSet res = query("Select * From ea." + table + " where " + field + "=" + value);
+        ResultSet res = query("Select * From ea." + table + " where " + field + "=" + value,true);
         boolean exist = false;
         table = table.toLowerCase();
         objectList = selectTable(table,objectList,res,exist);
@@ -32,7 +35,7 @@ public class DBtools {
 
     public static ArrayList<Object> Show(String table) {
         ArrayList<Object> objectList = new ArrayList();
-        ResultSet res = query("Select * From ea." + table);
+        ResultSet res = query("Select * From ea." + table,true);
         boolean exist = false;
         table = table.toLowerCase();
         objectList = selectTable(table,objectList,res,exist);
@@ -69,5 +72,14 @@ public class DBtools {
         return null;
     }
 
+    /**
+     *
+     * @param id
+     * @param table
+     */
+    private static void Delete(String id,String table){
+        query("Delete from "+table+" where Id = "+id,false);
+
+    }
 
 }
