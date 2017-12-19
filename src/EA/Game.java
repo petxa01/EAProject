@@ -12,6 +12,7 @@ public class Game {
     private String genre;
     private float price;//Renombrar Prize a Price
     private int franchieId;
+
     //Hay que borrar Stock de la base de datos
     public Game() {
 
@@ -23,6 +24,29 @@ public class Game {
         this.genre = genre;
         this.price = price;
         this.franchieId = franchieId;
+    }
+
+    public static ArrayList<Object> selectGames(ResultSet res, boolean exist) {
+        ArrayList<Object> objectList = new ArrayList();
+        try {
+
+            while (res.next()) {
+                exist = true;
+                Game game = new Game(
+                        Integer.parseInt(res.getString(1)),
+                        res.getString(2),
+                        res.getString(3),
+                        Float.parseFloat(res.getString(4)),
+                        Integer.parseInt(res.getString(5))
+                );
+                objectList.add(game);
+
+            }
+            res.close();
+        } catch (SQLException ex) {
+            System.out.println("SQL EXCEPTION");
+        }
+        return returnObjectList(objectList, exist);
     }
 
     public int getId() {
@@ -63,29 +87,6 @@ public class Game {
 
     public void setFranchieId(int franchieId) {
         this.franchieId = franchieId;
-    }
-
-    public static ArrayList<Object> selectGames(ResultSet res, boolean exist) {
-        ArrayList<Object> objectList = new ArrayList();
-        try {
-
-            while (res.next()) {
-                exist = true;
-                Game game = new Game(
-                        Integer.parseInt(res.getString(1)),
-                        res.getString(2),
-                        res.getString(3),
-                        Float.parseFloat(res.getString(4)),
-                        Integer.parseInt(res.getString(5))
-                );
-                objectList.add(game);
-
-            }
-            res.close();
-        } catch (SQLException ex) {
-            System.out.println("SQL EXCEPTION");
-        }
-        return returnObjectList(objectList, exist);
     }
 
 }

@@ -63,7 +63,7 @@ public class Main {
         System.out.println("---------------");
         System.out.println("[0] Back");
         //Clients
-        
+
         //Divisions
     }
 }

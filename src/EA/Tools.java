@@ -4,17 +4,15 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
-import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Tools {
     /**
-     *
      * @param statement The SQL statement to be executed.
-     * @param query   False: It's a Delete/Insert/Update statement
-     *                True: It's a Query
+     * @param query     False: It's a Delete/Insert/Update statement
+     *                  True: It's a Query
      * @return
      */
     public static ResultSet sqlStmt(String statement, boolean query) {
@@ -54,6 +52,7 @@ public class Tools {
         }
         return null;
     }
+
     public static ArrayList<Object> returnObjectList(ArrayList<Object> objectList, boolean exist) {
         if (exist)
             return objectList;

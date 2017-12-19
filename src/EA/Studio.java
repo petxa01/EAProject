@@ -22,6 +22,29 @@ public class Studio {
         this.divisionId = divisionId;
     }
 
+    public static ArrayList<Object> selectStudios(ResultSet res, boolean exist) {
+        ArrayList<Object> objectList = new ArrayList();
+        try {
+
+            while (res.next()) {
+                exist = true;
+                Studio studio = new Studio(
+                        Integer.parseInt(res.getString(1)),
+                        res.getString(2),
+                        res.getString(3),
+                        Integer.parseInt(res.getString(4))
+                );
+
+                objectList.add(studio);
+
+            }
+            res.close();
+        } catch (SQLException ex) {
+            System.out.println("SQL EXCEPTION");
+        }
+        return returnObjectList(objectList, exist);
+    }
+
     public int getId() {
         return id;
     }
@@ -52,28 +75,5 @@ public class Studio {
 
     public void setDivisionId(int divisionId) {
         this.divisionId = divisionId;
-    }
-
-    public static ArrayList<Object> selectStudios(ResultSet res, boolean exist) {
-        ArrayList<Object> objectList = new ArrayList();
-        try {
-
-            while (res.next()) {
-                exist = true;
-                Studio studio = new Studio(
-                        Integer.parseInt(res.getString(1)),
-                        res.getString(2),
-                        res.getString(3),
-                        Integer.parseInt(res.getString(4))
-                );
-
-                objectList.add(studio);
-
-            }
-            res.close();
-        } catch (SQLException ex) {
-            System.out.println("SQL EXCEPTION");
-        }
-        return returnObjectList(objectList, exist);
     }
 }

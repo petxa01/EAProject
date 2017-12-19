@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static EA.Tools.*;
+import static EA.Tools.returnObjectList;
 
 
 public class Client {
@@ -24,6 +24,34 @@ public class Client {
         this.category = category;
     }
 
+    /**
+     * @param res   resultado del sqlStmt
+     * @param exist comprobacion de si el result no esta vacio
+     * @return devuelve los resultados en un arrayList de objetos es null si el result esta vacio
+     */
+    public static ArrayList<Object> selectClients(ResultSet res, boolean exist) {
+        ArrayList<Object> objectList = new ArrayList();
+        try {
+
+
+            while (res.next()) {
+                exist = true;
+                Client client = new Client(
+                        Integer.parseInt(res.getString(1)),
+                        res.getString(2),
+                        res.getString(3),
+                        res.getString(4)
+                );
+
+                objectList.add(client);
+
+            }
+            res.close();
+        } catch (SQLException ex) {
+            System.out.println("SQL EXCEPTION");
+        }
+        return returnObjectList(objectList, exist);
+    }
 
     public String getCategory() {
         return category;
@@ -55,36 +83,6 @@ public class Client {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    /**
-     *
-     * @param res resultado del sqlStmt
-     * @param exist comprobacion de si el result no esta vacio
-     * @return devuelve los resultados en un arrayList de objetos es null si el result esta vacio
-     */
-    public static ArrayList<Object> selectClients(ResultSet res, boolean exist) {
-        ArrayList<Object> objectList = new ArrayList();
-        try {
-
-
-            while (res.next()) {
-                exist = true;
-                Client client = new Client(
-                        Integer.parseInt(res.getString(1)),
-                        res.getString(2),
-                        res.getString(3),
-                        res.getString(4)
-                );
-
-                objectList.add(client);
-
-            }
-            res.close();
-        } catch (SQLException ex) {
-            System.out.println("SQL EXCEPTION");
-        }
-        return returnObjectList(objectList, exist);
     }
 
 

@@ -3,8 +3,8 @@ package EA;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import static EA.Tools.returnObjectList;
@@ -25,6 +25,30 @@ public class Sale {
         this.date = date;
         this.gameId = gameId;
         this.clientId = clientId;
+    }
+
+    public static ArrayList<Object> selectSales(ResultSet res, boolean exist) {
+        ArrayList<Object> objectList = new ArrayList();
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("y M d", Locale.ENGLISH);
+            while (res.next()) {
+                exist = true;
+                Sale sale = new Sale(
+                        Integer.parseInt(res.getString(1)),
+                        Integer.parseInt(res.getString(2)),
+                        LocalDate.parse(res.getString(3), formatter),
+                        Integer.parseInt(res.getString(4)),
+                        Integer.parseInt(res.getString(5))
+                );
+
+                objectList.add(sale);
+
+            }
+            res.close();
+        } catch (SQLException ex) {
+            System.out.println("SQL EXCEPTION");
+        }
+        return returnObjectList(objectList, exist);
     }
 
     public int getId() {
@@ -65,30 +89,6 @@ public class Sale {
 
     public void setClientId(int clientId) {
         this.clientId = clientId;
-    }
-
-    public static ArrayList<Object> selectSales(ResultSet res, boolean exist) {
-        ArrayList<Object> objectList = new ArrayList();
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("y M d", Locale.ENGLISH);
-            while (res.next()) {
-                exist = true;
-                Sale sale = new Sale(
-                        Integer.parseInt(res.getString(1)),
-                        Integer.parseInt(res.getString(2)),
-                        LocalDate.parse(res.getString(3), formatter),
-                        Integer.parseInt(res.getString(4)),
-                        Integer.parseInt(res.getString(5))
-                );
-
-                objectList.add(sale);
-
-            }
-            res.close();
-        } catch (SQLException ex) {
-            System.out.println("SQL EXCEPTION");
-        }
-        return returnObjectList(objectList, exist);
     }
 
 }
