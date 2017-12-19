@@ -35,7 +35,8 @@ public class Division {
         Name = name;
     }
 
-    public static ArrayList<Object> selectDivisions(ArrayList<Object> objectList, ResultSet res, boolean exist) {
+    public static ArrayList<Object> selectDivisions(ResultSet res, boolean exist) {
+        ArrayList<Object> objectList = new ArrayList();
         try {
 
             while (res.next()) {

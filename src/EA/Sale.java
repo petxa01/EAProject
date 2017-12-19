@@ -67,7 +67,8 @@ public class Sale {
         this.clientId = clientId;
     }
 
-    public static ArrayList<Object> selectSales(ArrayList<Object> objectList, ResultSet res, boolean exist) {
+    public static ArrayList<Object> selectSales(ResultSet res, boolean exist) {
+        ArrayList<Object> objectList = new ArrayList();
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("y M d", Locale.ENGLISH);
             while (res.next()) {
