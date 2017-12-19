@@ -13,7 +13,7 @@ import static EA.Franchise.*;
 import static EA.Game.*;
 import static EA.Sale.*;
 
-public class Management {
+public class DBtools {
     /**
      * @param table nombre de las tablas
      * @param field campo para comparar
