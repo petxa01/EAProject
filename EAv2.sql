@@ -28,6 +28,7 @@ CREATE TABLE `clients` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
   `Category` varchar(45) NOT NULL,
+  `IdCard` varchar(45) NOT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -38,7 +39,7 @@ CREATE TABLE `clients` (
 
 LOCK TABLES `clients` WRITE;
 /*!40000 ALTER TABLE `clients` DISABLE KEYS */;
-INSERT INTO `clients` VALUES (1,'Game','Enterprise'),(2,'MediaMarkt','Enterprise'),(3,'Juan','Customer'),(4,'James','Customer');
+INSERT INTO `clients` VALUES (1,'Game','Enterprise',''),(2,'MediaMarkt','Enterprise',''),(3,'Juan','Customer',''),(4,'James','Customer','');
 /*!40000 ALTER TABLE `clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,7 +167,6 @@ CREATE TABLE `games` (
   `Name` varchar(45) NOT NULL,
   `Genre` varchar(45) NOT NULL,
   `Prize` float NOT NULL,
-  `Stock` int(11) NOT NULL,
   `FranchiseId` int(11) DEFAULT NULL,
   PRIMARY KEY (`Id`),
   KEY `Franchises_idx` (`FranchiseId`),
@@ -180,7 +180,7 @@ CREATE TABLE `games` (
 
 LOCK TABLES `games` WRITE;
 /*!40000 ALTER TABLE `games` DISABLE KEYS */;
-INSERT INTO `games` VALUES (1,'Burnout','Racing',15,120,11),(2,'Burnout 2: Point of Impact','Racing',20,120,11),(3,'Burnout 3: Takedown','Racing',24.99,200,11),(4,'Need For Speed: Most Wanted','Racing',5,120,12),(5,'Need For Speed: Underground','Racing',5,120,12),(6,'Battlefield 3','Shooter',19.95,120,13),(7,'Battlefield 4','Shooter',4.98,200,13),(8,'Battlefield 1','Shooter',19.97,200,13),(9,'Medal Of Honor','Shooter',9.95,120,14),(10,'Medal Of Honor Airbone','Shooter',4.95,120,14),(11,'2K18','Sports',39.95,120,15),(12,'2K17','Sports',19.95,120,15),(13,'Madden NFL 18','Sports',69.95,120,16),(14,'Madden NFL 17','Sports',39.95,120,16),(15,'FIFA 18','Sports',54.95,200,17),(16,'FIFA 17','Sports',24.95,120,17),(17,'The SIMS 4','Simulation',39.95,200,18),(18,'The SIMS 4: Cats & Dogs ','Simulation',39.95,200,18),(19,'Flight Control','Time management',0.99,200,19),(20,'Need For Speed No Limits','Racing',0,200,20);
+INSERT INTO `games` VALUES (1,'Burnout','Racing',15,11),(2,'Burnout 2: Point of Impact','Racing',20,11),(3,'Burnout 3: Takedown','Racing',24.99,11),(4,'Need For Speed: Most Wanted','Racing',5,12),(5,'Need For Speed: Underground','Racing',5,12),(6,'Battlefield 3','Shooter',19.95,13),(7,'Battlefield 4','Shooter',4.98,13),(8,'Battlefield 1','Shooter',19.97,13),(9,'Medal Of Honor','Shooter',9.95,14),(10,'Medal Of Honor Airbone','Shooter',4.95,14),(11,'2K18','Sports',39.95,15),(12,'2K17','Sports',19.95,15),(13,'Madden NFL 18','Sports',69.95,16),(14,'Madden NFL 17','Sports',39.95,16),(15,'FIFA 18','Sports',54.95,17),(16,'FIFA 17','Sports',24.95,17),(17,'The SIMS 4','Simulation',39.95,18),(18,'The SIMS 4: Cats & Dogs ','Simulation',39.95,18),(19,'Flight Control','Time management',0.99,19),(20,'Need For Speed No Limits','Racing',0,20);
 /*!40000 ALTER TABLE `games` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -253,4 +253,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-13  9:44:24
+-- Dump completed on 2017-12-19  9:20:19
