@@ -13,21 +13,21 @@ public class Tools {
     /**
      *
      * @param statement The SQL statement to be executed.
-     * @param returns False: It's a Delete/Insert/Update
+     * @param query   False: It's a Delete/Insert/Update statement
      *                True: It's a Query
      * @return
      */
-    public static ResultSet query(String statement, boolean returns) {
+    public static ResultSet sqlStmt(String statement, boolean query) {
         //Set up the conexion
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setPort(3306);
         dataSource.setUser("root");
         dataSource.setPassword("");
-        dataSource.setDatabaseName("Ea");
+        dataSource.setDatabaseName("ea");
         dataSource.setServerName("127.0.0.1");
         Connection conn;
         Statement stmt;
-        if (returns) {
+        if (query) {
 
             ResultSet rs;
             try {
@@ -35,13 +35,10 @@ public class Tools {
                 conn = (Connection) dataSource.getConnection();
                 stmt = (Statement) conn.createStatement();
                 rs = stmt.executeQuery(statement);
-                //Return the result of the query
+                //Return the result of the sqlStmt
                 return rs;
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null,
-                        "There has been an error with the DB.",
-                        "Oh oh",
-                        JOptionPane.ERROR_MESSAGE);
+                System.out.println("Error with the DB");
             }
         } else {
             try {
@@ -52,10 +49,7 @@ public class Tools {
 
                 return null;
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null,
-                        "There has been an error with the DB.",
-                        "Oh oh",
-                        JOptionPane.ERROR_MESSAGE);
+                System.out.println("Error with the DB");
             }
         }
         return null;

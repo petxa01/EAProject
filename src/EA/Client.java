@@ -59,7 +59,7 @@ public class Client {
 
     /**
      *
-     * @param res resultado del query
+     * @param res resultado del sqlStmt
      * @param exist comprobacion de si el result no esta vacio
      * @return devuelve los resultados en un arrayList de objetos es null si el result esta vacio
      */

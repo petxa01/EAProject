@@ -1,9 +1,6 @@
 package EA;
 
-import com.mysql.jdbc.PreparedStatement;
-
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static EA.Client.*;
@@ -18,14 +15,14 @@ import static EA.Sale.*;
 
 public class DBtools {
     /**
-     * @param table nombre de las tablas
-     * @param field campo para comparar
-     * @param value valor para comparar
-     * @return devuelve los resultados en un arrayList de objetos es null si el result esta vacio
+     * @param table Table name
+     * @param field Field name
+     * @param value Value to compare with the field
+     * @return ArrayList of the objects, returns null if empty
      */
     public static ArrayList<Object> show(String table, String field, String value) {
-        ArrayList<Object> objectList = new ArrayList();
-        ResultSet res = query("Select * From ea." + table + " where " + field + "=" + value,true);
+        ArrayList<Object> objectList;
+        ResultSet res = sqlStmt("Select * From ea." + table + " where " + field + "=" + value,true);
         boolean exist = false;
         table = table.toLowerCase();
         objectList = selectTable(table,res,exist);
@@ -37,8 +34,8 @@ public class DBtools {
      * @return returns
      */
     public static ArrayList<Object> show(String table) {
-        ArrayList<Object> objectList = new ArrayList();
-        ResultSet res = query("Select * From ea." + table,true);
+        ArrayList<Object> objectList;
+        ResultSet res = sqlStmt("Select * From ea." + table,true);
         boolean exist = false;
         table = table.toLowerCase();
         objectList = selectTable(table,res,exist);
@@ -49,10 +46,10 @@ public class DBtools {
 
     /**
      *
-     * @param table nombre de la tablas
+     * @param table Table name
      * @param res
      * @param exist
-     * @return ArrayList con el resultado del select
+     * @return ArrayList with the result of the query
      */
     private static ArrayList<Object> selectTable(String table, ResultSet res, boolean exist) {
         switch (table) { //tabla es siempre en minusculas
@@ -85,12 +82,22 @@ public class DBtools {
 
     /**
      *
+     * @param table Table name
+     * @param columnName Column name
+     * @param value New value
+     * @param condition WHERE condition
+     */
+    private static void update(String table,String columnName,String value,String condition){
+        sqlStmt("UPDATE "+table+" SET "+columnName+" = "+value+" WHERE "+condition,false);
+    }
+
+    /**
+     *
      * @param id
      * @param table
      */
-    private static void Delete(String id,String table){
-        query("Delete from "+table+" where Id = "+id,false);
-
+    private static void delete(String id,String table){
+        sqlStmt("Delete from "+table+" where Id = "+id,false);
     }
 
 }
