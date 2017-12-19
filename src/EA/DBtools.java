@@ -15,6 +15,7 @@ import static EA.Sale.*;
 
 public class DBtools {
     /**
+<<<<<<< HEAD
      * @param table Table name
      * @param field Field name
      * @param value Value to compare with the field
@@ -23,6 +24,15 @@ public class DBtools {
     public static ArrayList<Object> show(String table, String field, String value) {
         ArrayList<Object> objectList;
         ResultSet res = sqlStmt("Select * From ea." + table + " where " + field + "=" + value,true);
+=======
+     * @param table nombre de las tablas
+     * @param condition condition of the tables
+     * @return devuelve los resultados en un arrayList de objetos es null si el result esta vacio
+     */
+    public static ArrayList<Object> show(String table, String condition) {
+        ArrayList<Object> objectList = new ArrayList();
+        ResultSet res = query("Select * From ea." + table + " where " +condition,true);
+>>>>>>> 7dc6bf6c75669f96d732adfbb45910defcb11f9f
         boolean exist = false;
         table = table.toLowerCase();
         objectList = selectTable(table,res,exist);
