@@ -19,13 +19,12 @@ import static EA.Sale.*;
 public class DBtools {
     /**
      * @param table nombre de las tablas
-     * @param field campo para comparar
-     * @param value valor para comparar
+     * @param condition condition of the tables
      * @return devuelve los resultados en un arrayList de objetos es null si el result esta vacio
      */
-    public static ArrayList<Object> show(String table, String field, String value) {
+    public static ArrayList<Object> show(String table, String condition) {
         ArrayList<Object> objectList = new ArrayList();
-        ResultSet res = query("Select * From ea." + table + " where " + field + "=" + value,true);
+        ResultSet res = query("Select * From ea." + table + " where " +condition,true);
         boolean exist = false;
         table = table.toLowerCase();
         objectList = selectTable(table,res,exist);
