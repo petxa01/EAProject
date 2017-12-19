@@ -93,11 +93,11 @@ public class DBtools {
 
     /**
      *
-     * @param id
-     * @param table
+     * @param table Table name
+     * @param condition WHERE condition
      */
-    private static void delete(String id,String table){
-        sqlStmt("Delete from "+table+" where Id = "+id,false);
+    private static void delete(String table,String condition){
+        sqlStmt("Delete from "+table+" WHERE "+condition,false);
     }
 
 }
