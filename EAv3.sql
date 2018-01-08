@@ -56,7 +56,7 @@ CREATE TABLE `developers` (
   `Name` varchar(45) NOT NULL,
   `Surname` varchar(45) NOT NULL,
   `Salary` float NOT NULL,
-  `Position` varchar(45) NOT NULL,
+  `Job` varchar(45) NOT NULL,
   `Country` varchar(45) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `IdCard_UNIQUE` (`IdCard`)
@@ -166,7 +166,7 @@ CREATE TABLE `games` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
   `Genre` varchar(45) NOT NULL,
-  `Prize` float NOT NULL,
+  `Price` float NOT NULL,
   `FranchiseId` int(11) DEFAULT NULL,
   PRIMARY KEY (`Id`),
   KEY `Franchises_idx` (`FranchiseId`),
@@ -243,6 +243,10 @@ LOCK TABLES `studios` WRITE;
 INSERT INTO `studios` VALUES (1,'Criterion Games','UK',1),(2,'DICE','USA',1),(3,'EA Tiburon','USA',2),(4,'EA Canada','Canada',2),(5,'The Sims Studio','USA',3),(6,'Firemonkeys Studios','Australia',3),(7,'EA Mobile','USA',4);
 /*!40000 ALTER TABLE `studios` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'ea'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -253,4 +257,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-19  9:20:19
+-- Dump completed on 2018-01-08 13:47:27
