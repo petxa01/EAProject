@@ -29,6 +29,7 @@ public class Developer {
         this.country = country;
     }
     public static void insertDevelopers(String table){
+        System.out.println("PRUEBA");
         System.out.println("Enter the ID Card");
         String idCard=Read.String();
         System.out.println("Enter the name");
