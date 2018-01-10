@@ -28,6 +28,7 @@ public class Developer {
         this.job = job;
         this.country = country;
     }
+
     public static void insertDevelopers(String table){
         System.out.println("Enter the ID Card");
         String idCard=Read.String();
@@ -41,6 +42,7 @@ public class Developer {
         String job = Read.String();
         System.out.println("Enter the country");
         String country =Read.String();
+        System.out.println("prueba");
 
         sqlStmt("Insert into "+ table +" (IdCard, Name,Surname,Salary,Job,Country) VALUES ("+idCard+","+name+","+surname+","+salary+","+job+","+country+")", false);
     }
