@@ -44,37 +44,9 @@ public class DBtools {
         return null;
     }
 
-    public static boolean insertTable(String table) {
-        table=table.toLowerCase();
-        switch (table) { //tabla es siempre en minusculas
-            case "clients":
-                insertClients(table);
 
-            case "develops":
-                insertDevelops(table);
 
-            case "developers":
-                insertDevelopers(table);
 
-            case "studios":
-                insertStudios(table);
-
-            case "divisions":
-                insertDivisions(table);
-
-            case "franchises":
-                insertFranchises(table);
-
-            case "games":
-                insertGames(table);
-
-            case "sales":
-                insertSales(table);
-        }
-
-        return true;
-
-    }
 
 
     /**

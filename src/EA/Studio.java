@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static EA.Tools.returnObjectList;
+import static EA.Tools.sqlStmt;
 
 public class Studio {
     private int id;
@@ -44,6 +45,17 @@ public class Studio {
         }
         return returnObjectList(objectList, exist);
     }
+
+    public static void insertStudios(String table, int divisionId) {
+
+        System.out.println("Enter the name");
+        String name = Read.String();
+        System.out.println("Enter the country");
+        String country = Read.String();
+
+        sqlStmt("Insert into " + table + " (Name,Country,DivisionId) VALUES (" + name + "," + country + "," + divisionId + ")", false);
+    }
+
 
     public int getId() {
         return id;
