@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import static EA.DBtools.select;
+import static EA.Game.printGame;
 import static EA.Tools.returnObjectList;
 import static EA.Tools.sqlStmt;
 
@@ -53,15 +55,49 @@ public class Sale {
     }
 
     public static void insertSales(String table){
+        boolean repeat=false;
+        int gameId=0, clientId=0;
         System.out.println("Enter the quantity");
         int quantity=Read.Int();
         System.out.println("Enter the Date");
-        //TODO insert sale es que acaban de comprar? o metemos fecha random de venta
-        LocalDate date;
-        System.out.println("Enter the game id");
-        int gameId=Read.Int();
-        System.out.println("Enter the client ID");
-        int clientId = Read.Int();
+        LocalDate date = LocalDate.now();
+        do {
+            System.out.println("Type the name of the game:");
+            String gameName = Read.String();
+            ArrayList<Object> games = select("Games", "Name LIKE '%" + gameName + "%'");
+            if (games.size() > 1) {
+                System.out.println(games.size() + " games found:");
+                printGame(games);
+                System.out.println("please specify more");
+                repeat=true;
+            } else if(games.size()<1) {
+                System.out.println("No games found try again");
+                repeat=true;
+            }else {
+                repeat = false;
+                Game g = (Game) games.get(0);
+                gameId=g.getId();
+            }
+        }while(repeat);
+        do {
+            System.out.println("Type the id card of the client:");
+            int cardId = Read.Int();
+            ArrayList<Object> clients = select("Clients", "IdCard LIKE '%" + cardId + "%'");
+            if (clients.size() > 1) {
+                System.out.println(clients.size() + " clients found:");
+                printGame(clients);
+                System.out.println("please specify more");
+                repeat=true;
+            } else if(clients.size()<1) {
+                System.out.println("No clients found try again");
+                repeat=true;
+            }else {
+                repeat = false;
+                Client c = (Client) clients.get(0);
+                clientId=c.getId();
+            }
+        }while(repeat);
+
 
 
 
