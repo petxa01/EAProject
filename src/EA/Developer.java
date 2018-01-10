@@ -43,7 +43,8 @@ public class Developer {
         String job = Read.String();
         System.out.println("Enter the country");
         String country =Read.String();
-        System.out.println("prueba");
+        System.out.println("prueba2");
+
 
         sqlStmt("Insert into "+ table +" (IdCard, Name,Surname,Salary,Job,Country) VALUES ("+idCard+","+name+","+surname+","+salary+","+job+","+country+")", false);
     }
