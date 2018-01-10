@@ -6,25 +6,25 @@ import java.util.ArrayList;
 
 import static EA.DBtools.select;
 import static EA.Tools.returnObjectList;
+import static EA.Tools.sqlStmt;
 
 public class Game {
     private int id;
     private String name;
     private String genre;
     private float price;//Renombrar Prize a Price
-    private int franchieId;
+    private int franchiseId;
 
-    //Hay que borrar Stock de la base de datos
     public Game() {
 
     }
 
-    public Game(int id, String name, String genre, float price, int franchieId) {
+    public Game(int id, String name, String genre, float price, int franchiseId) {
         this.id = id;
         this.name = name;
         this.genre = genre;
         this.price = price;
-        this.franchieId = franchieId;
+        this.franchiseId = franchiseId;
     }
 
     public static ArrayList<Object> selectGames(ResultSet res, boolean exist) {
@@ -49,6 +49,17 @@ public class Game {
         }
         return returnObjectList(objectList, exist);
     }
+    public static void insertGames(String table, int franchiseId){
+        System.out.println("Enter the name");
+        String name=Read.String();
+        System.out.println("Enter the genre");
+        String genre=Read.String();
+        System.out.println("Enter the price");
+        float price = Read.Float();
+
+        sqlStmt("Insert into "+ table +" (Name,Genre,Price,FranchiseId) VALUES ("+name+","+genre+","+price+","+franchiseId+")", false);
+    }
+
 
     public int getId() {
         return id;
@@ -82,12 +93,12 @@ public class Game {
         this.price = price;
     }
 
-    public int getFranchieId() {
-        return franchieId;
+    public int getFranchiseId() {
+        return franchiseId;
     }
 
-    public void setFranchieId(int franchieId) {
-        this.franchieId = franchieId;
+    public void setFranchiseId(int franchiseId) {
+        this.franchiseId = franchiseId;
     }
 
     public static void printGame(ArrayList<Object> games) {
@@ -96,11 +107,13 @@ public class Game {
             System.out.println("Name: "+game.getName());
             System.out.println("Genre: "+game.getGenre());
             System.out.println("Price: "+game.getPrice());
-            Franchise f = (Franchise) select("Franchises","Id = "+game.getFranchieId()).get(0);
+            Franchise f = (Franchise) select("Franchises","Id = "+game.getFranchiseId()).get(0);
             System.out.println("Franchise: "+f.getName());
             System.out.println("``````````````````````````");
 
         }
     }
+
+
 
 }
