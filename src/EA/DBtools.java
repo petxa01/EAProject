@@ -3,15 +3,15 @@ package EA;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import static EA.Client.selectClients;
-import static EA.Develop.selectDevelop;
-import static EA.Developer.selectDevelopers;
-import static EA.Division.selectDivisions;
-import static EA.Franchise.selectFranchises;
-import static EA.Game.selectGames;
-import static EA.Sale.selectSales;
-import static EA.Studio.selectStudios;
-import static EA.Tools.sqlStmt;
+import static EA.Client.*;
+import static EA.Develop.*;
+import static EA.Developer.*;
+import static EA.Division.*;
+import static EA.Franchise.*;
+import static EA.Game.*;
+import static EA.Sale.*;
+import static EA.Studio.*;
+import static EA.Tools.*;
 
 public class DBtools {
     /**
@@ -35,12 +35,45 @@ public class DBtools {
      */
     public static ArrayList<Object> select(String table) {
         ArrayList<Object> objectList;
+        table.toLowerCase();
         ResultSet res = sqlStmt("Select * From ea." + table, true);
         boolean exist = false;
         table = table.toLowerCase();
         objectList = selectTable(table, res, exist);
         if (objectList != null) return objectList;
         return null;
+    }
+
+    public static boolean insertTable(String table) {
+        table=table.toLowerCase();
+        switch (table) { //tabla es siempre en minusculas
+            case "clients":
+                insertClients(table);
+
+            case "develops":
+                insertDevelops(table);
+
+            case "developers":
+                insertDevelopers(table);
+
+            case "studios":
+                insertStudios(table);
+
+            case "divisions":
+                insertDivisions(table);
+
+            case "franchises":
+                insertFranchises(table);
+
+            case "games":
+                insertGames(table);
+
+            case "sales":
+                insertSales(table);
+        }
+
+        return true;
+
     }
 
 
@@ -51,6 +84,7 @@ public class DBtools {
      * @return ArrayList with the result of the query
      */
     private static ArrayList<Object> selectTable(String table, ResultSet res, boolean exist) {
+        table=table.toLowerCase();
         switch (table) { //tabla es siempre en minusculas
             case "clients":
                 return selectClients(res, exist);
@@ -61,7 +95,7 @@ public class DBtools {
             case "developers":
                 return selectDevelopers(res, exist);
 
-            case "studio":
+            case "studios":
                 return selectStudios(res, exist);
 
             case "divisions":

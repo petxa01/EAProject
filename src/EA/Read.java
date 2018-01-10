@@ -41,6 +41,24 @@ public class Read {
         } while (x == true);
         return a;
     }
+    public static boolean Boolean() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String s = null;
+        boolean a=true;
+        boolean x;
+        do {
+            x = false;
+            try {
+                s = reader.readLine();
+                a = Boolean.parseBoolean(s);
+            } catch (Exception Integer) {
+                System.out.println("You typed something wrong, try again");
+                System.out.println("");
+                x = true;
+            }
+        } while (x == true);
+        return a;
+    }
 
     public static float Float() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

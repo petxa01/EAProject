@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static EA.Tools.returnObjectList;
+import static EA.Tools.sqlStmt;
 
 
 public class Client {
@@ -51,6 +52,16 @@ public class Client {
             System.out.println("SQL EXCEPTION");
         }
         return returnObjectList(objectList, exist);
+    }
+    public static void insertClients(String table){
+        System.out.println("Enter the id card");
+        String idCard=Read.String();
+        System.out.println("Enter the Client name");
+        String name=Read.String();
+        System.out.println("Enter the client category");
+        String category=Read.String();
+
+        sqlStmt("Insert into "+ table +" (Name, Category,IdCard) VALUES ("+name+","+category+","+idCard+")", false);
     }
 
     public String getCategory() {

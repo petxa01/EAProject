@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static EA.Tools.returnObjectList;
+import static EA.Tools.sqlStmt;
 
 public class Develop {
 
@@ -46,6 +47,16 @@ public class Develop {
             System.out.println("SQL EXCEPTION");
         }
         return returnObjectList(objectList, exist);
+    }
+    public static void insertDevelops(String table){
+        System.out.println("Enter the developer ID");
+        int devId=Read.Int();
+        System.out.println("Enter the game ID");
+        int gameId=Read.Int();
+        System.out.println("Enter the game status(true if finished)");
+        Boolean finished=Read.Boolean();
+
+        sqlStmt("Insert into "+ table +" (DeveloperID, GameID,Finished) VALUES ("+devId+","+gameId+","+finished+")", false);
     }
 
     public int getDeveloperId() {

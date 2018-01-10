@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static EA.Tools.returnObjectList;
+import static EA.Tools.sqlStmt;
 
 public class Developer {
     private int id;
@@ -26,6 +27,22 @@ public class Developer {
         this.salary = salary;
         this.job = job;
         this.country = country;
+    }
+    public static void insertDevelopers(String table){
+        System.out.println("Enter the ID Card");
+        String idCard=Read.String();
+        System.out.println("Enter the name");
+        String name=Read.String();
+        System.out.println("Enter the surname");
+        String surname=Read.String();
+        System.out.println("Enter the salary");
+        float salary = Read.Float();
+        System.out.println("Enter the job");
+        String job = Read.String();
+        System.out.println("Enter the country");
+        String country =Read.String();
+
+        sqlStmt("Insert into "+ table +" (IdCard, Name,Surname,Salary,Job,Country) VALUES ("+idCard+","+name+","+surname+","+salary+","+job+","+country+")", false);
     }
 
     public int getId() {
