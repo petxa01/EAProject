@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static EA.DBtools.select;
 import static EA.Tools.returnObjectList;
 
 public class Game {
@@ -87,6 +88,19 @@ public class Game {
 
     public void setFranchieId(int franchieId) {
         this.franchieId = franchieId;
+    }
+
+    public static void printGame(ArrayList<Object> games) {
+        for (Object g:games) {
+            Game game = (Game) g;
+            System.out.println("Name: "+game.getName());
+            System.out.println("Genre: "+game.getGenre());
+            System.out.println("Price: "+game.getPrice());
+            Franchise f = (Franchise) select("Franchises","Id = "+game.getFranchieId()).get(0);
+            System.out.println("Franchise: "+f.getName());
+            System.out.println("``````````````````````````");
+
+        }
     }
 
 }
