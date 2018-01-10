@@ -64,6 +64,7 @@ public class Main {
                             }else{
                                 System.out.println("No games found");
                             }
+                            break;
                     }
                     break;
                 case 2:
