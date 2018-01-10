@@ -30,7 +30,6 @@ public class Developer {
     }
 
     public static void insertDevelopers(String table){
-        System.out.println("PRUEBA");
         System.out.println("Enter the ID Card");
         String idCard=Read.String();
         System.out.println("Enter the name");
@@ -43,7 +42,7 @@ public class Developer {
         String job = Read.String();
         System.out.println("Enter the country");
         String country =Read.String();
-        System.out.println("prueba");
+
 
         sqlStmt("Insert into "+ table +" (IdCard, Name,Surname,Salary,Job,Country) VALUES ("+idCard+","+name+","+surname+","+salary+","+job+","+country+")", false);
     }
