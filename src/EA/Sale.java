@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import static EA.Tools.returnObjectList;
+import static EA.Tools.sqlStmt;
 
 public class Sale {
     int id;
@@ -50,6 +51,23 @@ public class Sale {
         }
         return returnObjectList(objectList, exist);
     }
+
+    public static void insertSales(String table){
+        System.out.println("Enter the quantity");
+        int quantity=Read.Int();
+        System.out.println("Enter the Date");
+        //TODO insert sale es que acaban de comprar? o metemos fecha random de venta
+        LocalDate date;
+        System.out.println("Enter the game id");
+        int gameId=Read.Int();
+        System.out.println("Enter the client ID");
+        int clientId = Read.Int();
+
+
+
+        sqlStmt("Insert into "+ table +" (Quantity,Date,GameId,ClientId) VALUES ("+quantity+","+date+","+gameId+","+clientId+")", false);
+    }
+
 
     public int getId() {
         return id;
