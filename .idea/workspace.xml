@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="158ea573-7a2b-4b6c-8098-b6d009539083" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/EA/Client.java" afterPath="$PROJECT_DIR$/src/EA/Client.java" />
-      <change beforePath="$PROJECT_DIR$/src/EA/Develop.java" afterPath="$PROJECT_DIR$/src/EA/Develop.java" />
-      <change beforePath="$PROJECT_DIR$/src/EA/Developer.java" afterPath="$PROJECT_DIR$/src/EA/Developer.java" />
-      <change beforePath="$PROJECT_DIR$/src/EA/Division.java" afterPath="$PROJECT_DIR$/src/EA/Division.java" />
       <change beforePath="$PROJECT_DIR$/src/EA/Franchise.java" afterPath="$PROJECT_DIR$/src/EA/Franchise.java" />
-      <change beforePath="$PROJECT_DIR$/src/EA/Game.java" afterPath="$PROJECT_DIR$/src/EA/Game.java" />
-      <change beforePath="$PROJECT_DIR$/src/EA/Sale.java" afterPath="$PROJECT_DIR$/src/EA/Sale.java" />
-      <change beforePath="$PROJECT_DIR$/src/EA/Studio.java" afterPath="$PROJECT_DIR$/src/EA/Studio.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -322,12 +315,12 @@
       <workItem from="1513174214485" duration="836000" />
       <workItem from="1513587493389" duration="3317000" />
       <workItem from="1515584131931" duration="41000" />
-      <workItem from="1516015087513" duration="792000" />
+      <workItem from="1516015087513" duration="814000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11293000" />
+    <option name="totallyTimeSpent" value="11315000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />

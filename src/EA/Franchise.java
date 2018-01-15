@@ -66,8 +66,7 @@ public class Franchise {
         return returnObjectList(objectList, exist);
     }
     public static void insertFranchise(String table, int studioId){
-        System.out.println("Enter the name");
-        String name=Read.String();
+        String name=Read.String("Enter the name");
 
         sqlStmt("Insert into "+ table +" (Name,StudioId) VALUES ("+name+","+studioId+")", false);
     }
