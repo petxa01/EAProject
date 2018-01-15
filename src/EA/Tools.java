@@ -59,4 +59,9 @@ public class Tools {
         else
             return null;
     }
+    public static void cls() {
+        for (int i = 0; i < 50; i++) {
+            System.out.println("");
+        }
+    }
 }
