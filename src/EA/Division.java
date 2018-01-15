@@ -56,8 +56,7 @@ public class Division {
         return returnObjectList(objectList, exist);
     }
     public static void insertDivisions(String table){
-        System.out.println("Enter the name");
-        String name=Read.String();
+        String name=Read.String("Enter the name");
 
         sqlStmt("Insert into "+ table +" (Name) VALUES ("+name+")", false);
     }

@@ -48,10 +48,8 @@ public class Studio {
 
     public static void insertStudios(String table, int divisionId) {
 
-        System.out.println("Enter the name");
-        String name = Read.String();
-        System.out.println("Enter the country");
-        String country = Read.String();
+        String name = Read.String("Enter the name");
+        String country = Read.String("Enter the country");
 
         sqlStmt("Insert into " + table + " (Name,Country,DivisionId) VALUES (" + name + "," + country + "," + divisionId + ")", false);
     }

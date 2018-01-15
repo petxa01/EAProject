@@ -23,8 +23,9 @@ public class Read {
 //        }
 //    }
 
-    public static int Int() {
+    public static int Int(String text) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println(text);
         String s = null;
         int a = 0;
         boolean x;
@@ -41,8 +42,9 @@ public class Read {
         } while (x == true);
         return a;
     }
-    public static boolean Boolean() {
+    public static boolean Boolean(String text) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println(text);
         String s = null;
         boolean a=true;
         boolean x;
@@ -60,8 +62,9 @@ public class Read {
         return a;
     }
 
-    public static float Float() {
+    public static float Float(String text) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println(text);
         String s = null;
         float a = 0;
         boolean x;
@@ -79,8 +82,9 @@ public class Read {
         return a;
     }
 
-    public static double Double() {
+    public static double Double(String text) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println(text);
         String s = null;
         double a = 0;
         boolean x;
@@ -98,8 +102,9 @@ public class Read {
         return a;
     }
 
-    public static String String() {
+    public static String String(String text) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println(text);
         String a = null;
         try {
             a = reader.readLine();

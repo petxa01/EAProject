@@ -54,12 +54,9 @@ public class Client {
         return returnObjectList(objectList, exist);
     }
     public static void insertClients(String table){
-        System.out.println("Enter the id card");
-        String idCard=Read.String();
-        System.out.println("Enter the Client name");
-        String name=Read.String();
-        System.out.println("Enter the client category");
-        String category=Read.String();
+        String idCard=Read.String("Enter the id card");
+        String name=Read.String("Enter the Client name");
+        String category=Read.String("Enter the client category");
 
         sqlStmt("Insert into "+ table +" (Name, Category,IdCard) VALUES ("+name+","+category+","+idCard+")", false);
     }

@@ -30,18 +30,12 @@ public class Developer {
     }
 
     public static void insertDevelopers(String table){
-        System.out.println("Enter the ID Card");
-        String idCard=Read.String();
-        System.out.println("Enter the name");
-        String name=Read.String();
-        System.out.println("Enter the surname");
-        String surname=Read.String();
-        System.out.println("Enter the salary");
-        float salary = Read.Float();
-        System.out.println("Enter the job");
-        String job = Read.String();
-        System.out.println("Enter the country");
-        String country =Read.String();
+        String idCard=Read.String("Enter the ID Card");
+        String name=Read.String("Enter the name");
+        String surname=Read.String("Enter the surname");
+        float salary = Read.Float("Enter the salary");
+        String job = Read.String("Enter the job");
+        String country =Read.String("Enter the country");
 
 
         sqlStmt("Insert into "+ table +" (IdCard, Name,Surname,Salary,Job,Country) VALUES ("+idCard+","+name+","+surname+","+salary+","+job+","+country+")", false);
