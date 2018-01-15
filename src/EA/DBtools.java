@@ -103,4 +103,5 @@ public class DBtools {
         sqlStmt("Delete from " + table + " WHERE " + condition, false);
     }
 
+
 }

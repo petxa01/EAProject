@@ -56,7 +56,18 @@ public class Game {
 
         sqlStmt("Insert into "+ table +" (Name,Genre,Price,FranchiseId) VALUES ("+name+","+genre+","+price+","+franchiseId+")", false);
     }
+    public static void printGame(ArrayList<Object> games) {
+        for (Object g:games) {
+            Game game = (Game) g;
+            System.out.println("Name: "+game.getName());
+            System.out.println("Genre: "+game.getGenre());
+            System.out.println("Price: "+game.getPrice());
+            Franchise f = (Franchise) select("Franchises","Id = "+game.getFranchiseId()).get(0);
+            System.out.println("Franchise: "+f.getName());
+            System.out.println("``````````````````````````");
 
+        }
+    }
 
     public int getId() {
         return id;
@@ -98,18 +109,7 @@ public class Game {
         this.franchiseId = franchiseId;
     }
 
-    public static void printGame(ArrayList<Object> games) {
-        for (Object g:games) {
-            Game game = (Game) g;
-            System.out.println("Name: "+game.getName());
-            System.out.println("Genre: "+game.getGenre());
-            System.out.println("Price: "+game.getPrice());
-            Franchise f = (Franchise) select("Franchises","Id = "+game.getFranchiseId()).get(0);
-            System.out.println("Franchise: "+f.getName());
-            System.out.println("``````````````````````````");
 
-        }
-    }
 
 
 

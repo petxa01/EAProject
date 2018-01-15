@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static EA.DBtools.select;
 import static EA.Tools.returnObjectList;
 import static EA.Tools.sqlStmt;
 
@@ -65,10 +66,22 @@ public class Franchise {
         }
         return returnObjectList(objectList, exist);
     }
-    public static void insertFranchise(String table, int studioId){
+    //TODO: Completar método con LIKE
+    public static void insertFranchise(){
         String name=Read.String("Enter the name");
 
-        sqlStmt("Insert into "+ table +" (Name,StudioId) VALUES ("+name+","+studioId+")", false);
+        sqlStmt("Insert into franchises (Name,StudioId) VALUES ("+name+","+studioId+")", false);
+    }
+
+    public static void printFranchise(ArrayList<Object> franchises) {
+        for (Object f:franchises) {
+            Franchise franchise = (Franchise) f;
+            System.out.println("Name: "+franchise.getName());
+            Studio s = (Studio) select("Studios","Id = "+franchise.getStudioId()).get(0);
+            System.out.println("\tStudio: "+s.getName());
+            System.out.println("``````````````````````````");
+
+        }
     }
 
 }

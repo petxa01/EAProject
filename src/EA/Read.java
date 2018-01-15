@@ -39,7 +39,7 @@ public class Read {
                 System.out.println("");
                 x = true;
             }
-        } while (x == true);
+        } while (x);
         return a;
     }
     public static boolean Boolean(String text) {
@@ -58,7 +58,7 @@ public class Read {
                 System.out.println("");
                 x = true;
             }
-        } while (x == true);
+        } while (x);
         return a;
     }
 
@@ -78,7 +78,7 @@ public class Read {
                 System.out.println("");
                 x = true;
             }
-        } while (x == true);
+        } while (x);
         return a;
     }
 
@@ -98,7 +98,7 @@ public class Read {
                 System.out.println("");
                 x = true;
             }
-        } while (x == true);
+        } while (x);
         return a;
     }
 
@@ -112,5 +112,10 @@ public class Read {
             Logger.getLogger(Read.class.getName()).log(Level.SEVERE, null, ex);
         }
         return a;
+    }
+    public static void Pause() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("*Press enter key to continue*");
+        reader.readLine();
     }
 }

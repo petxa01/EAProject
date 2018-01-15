@@ -20,7 +20,7 @@ public class Tools {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setPort(3306);
         dataSource.setUser("root");
-        dataSource.setPassword("");
+        dataSource.setPassword("admindam2");
         dataSource.setDatabaseName("ea");
         dataSource.setServerName("127.0.0.1");
         Connection conn;
@@ -59,6 +59,11 @@ public class Tools {
         else
             return null;
     }
+
+
+    /**
+     * Clears the console
+     */
     public static void cls() {
         for (int i = 0; i < 50; i++) {
             System.out.println("");

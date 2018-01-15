@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static EA.DBtools.select;
+import static EA.Franchise.insertFranchise;
+import static EA.Franchise.printFranchise;
 import static EA.Game.printGame;
 import static EA.Tools.cls;
 
@@ -13,7 +15,7 @@ public class Main {
         // write your code here
         boolean repeatAll, repeatSub;
         int chooser;
-        ArrayList<Object> games = null;
+
         //Main menu
         do {
             repeatAll = true;
@@ -38,6 +40,7 @@ public class Main {
                     do {
                         repeatSub = true;
                         cls();
+                        ArrayList<Object> games = null;
                         System.out.println("+++++++++++GAMES+++++++++++");
                         System.out.println("+      [1] Game List      +");
                         System.out.println("+       [2] Search        +");
@@ -50,17 +53,17 @@ public class Main {
                         System.out.println("+    franchises section   +");
                         chooser = Read.Int("+-------------------------+");
                         switch (chooser) {
+
                             case 1:
-                                if (games != null) {
-                                    games.clear();
-                                }
+
                                 games = select("Games");
                                 System.out.println("GAME LIST:");
                                 System.out.println("``````````````````````````");
                                 printGame(games);
+                                Read.Pause();
                                 break;
                             case 2:
-                                games.clear();
+
                                 System.out.println("Searching for a game...");
                                 String gameName = Read.String("Type the name of the game:");
                                 games = select("Games", "Name LIKE '%" + gameName + "%'");
@@ -70,6 +73,7 @@ public class Main {
                                 } else {
                                     System.out.println("No games found");
                                 }
+                                Read.Pause();
                                 break;
                             case 3:
                                 //TODO: Añadir delete
@@ -81,9 +85,11 @@ public class Main {
                         }
                         break;
                     } while (repeatSub);
+                    break;
                 case 2:
                     //Franchises
                     cls();
+                    ArrayList<Object> franchises = null;
                     System.out.println("++++++++++++FRANCHISES+++++++++++++");
                     System.out.println("+        [1] Franchise List       +");
                     System.out.println("+---------------------------------+");
@@ -96,7 +102,21 @@ public class Main {
                     System.out.println("+       [6] Edit Franchise        +");
                     System.out.println("+---------------------------------+");
                     System.out.println("+            [0] Back             +");
-                    System.out.println("+++++++++++++++++++++++++++++++++++");
+                    chooser = Read.Int("+++++++++++++++++++++++++++++++++++");
+                    switch (chooser) {
+                        case 1:
+                            franchises = select("Franchises");
+                            System.out.println("FRANCHISE LIST:");
+                            System.out.println("``````````````````````````");
+                            printFranchise(franchises);
+                            Read.Pause();
+                            break;
+                        case 2:
+                            //TODO: Completar cuando esté el método insertFranchise terminado
+                            break;
+                        case 3:
+
+                    }
                     break;
                 case 3:
                     //Studios
