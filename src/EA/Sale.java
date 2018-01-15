@@ -57,13 +57,11 @@ public class Sale {
     public static void insertSales(String table){
         boolean repeat=false;
         int gameId=0, clientId=0;
-        System.out.println("Enter the quantity");
-        int quantity=Read.Int();
-        System.out.println("Enter the Date");
+        System.out.println();
+        int quantity=Read.Int("Enter the quantity");
         LocalDate date = LocalDate.now();
         do {
-            System.out.println("Type the name of the game:");
-            String gameName = Read.String();
+            String gameName = Read.String("Type the name of the game:");
             ArrayList<Object> games = select("Games", "Name LIKE '%" + gameName + "%'");
             if (games.size() > 1) {
                 System.out.println(games.size() + " games found:");
@@ -80,8 +78,7 @@ public class Sale {
             }
         }while(repeat);
         do {
-            System.out.println("Type the id card of the client:");
-            int cardId = Read.Int();
+            int cardId = Read.Int("Type the id card of the client:");
             ArrayList<Object> clients = select("Clients", "IdCard LIKE '%" + cardId + "%'");
             if (clients.size() > 1) {
                 System.out.println(clients.size() + " clients found:");

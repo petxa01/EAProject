@@ -50,12 +50,9 @@ public class Game {
         return returnObjectList(objectList, exist);
     }
     public static void insertGames(String table, int franchiseId){
-        System.out.println("Enter the name");
-        String name=Read.String();
-        System.out.println("Enter the genre");
-        String genre=Read.String();
-        System.out.println("Enter the price");
-        float price = Read.Float();
+        String name=Read.String("Enter the name");
+        String genre=Read.String("Enter the genre");
+        float price = Read.Float("Enter the price");
 
         sqlStmt("Insert into "+ table +" (Name,Genre,Price,FranchiseId) VALUES ("+name+","+genre+","+price+","+franchiseId+")", false);
     }

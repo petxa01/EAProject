@@ -49,12 +49,9 @@ public class Develop {
         return returnObjectList(objectList, exist);
     }
     public static void insertDevelops(String table){
-        System.out.println("Enter the developer ID");
-        int devId=Read.Int();
-        System.out.println("Enter the game ID");
-        int gameId=Read.Int();
-        System.out.println("Enter the game status(true if finished)");
-        Boolean finished=Read.Boolean();
+        int devId=Read.Int("Enter the developer ID");
+        int gameId=Read.Int("Enter the game ID");
+        boolean finished=Read.Boolean("Enter the game status(true if finished)");
 
         sqlStmt("Insert into "+ table +" (DeveloperID, GameID,Finished) VALUES ("+devId+","+gameId+","+finished+")", false);
     }
