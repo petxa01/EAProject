@@ -49,21 +49,23 @@ public class Game {
         }
         return returnObjectList(objectList, exist);
     }
-    public static void insertGames(String table, int franchiseId){
-        String name=Read.String("Enter the name");
-        String genre=Read.String("Enter the genre");
+
+    public static void insertGames(String table, int franchiseId) {
+        String name = Read.String("Enter the name");
+        String genre = Read.String("Enter the genre");
         float price = Read.Float("Enter the price");
 
-        sqlStmt("Insert into "+ table +" (Name,Genre,Price,FranchiseId) VALUES ("+name+","+genre+","+price+","+franchiseId+")", false);
+        sqlStmt("Insert into " + table + " (Name,Genre,Price,FranchiseId) VALUES (" + name + "," + genre + "," + price + "," + franchiseId + ")", false);
     }
+
     public static void printGame(ArrayList<Object> games) {
-        for (Object g:games) {
+        for (Object g : games) {
             Game game = (Game) g;
-            System.out.println("Name: "+game.getName());
-            System.out.println("Genre: "+game.getGenre());
-            System.out.println("Price: "+game.getPrice());
-            Franchise f = (Franchise) select("Franchises","Id = "+game.getFranchiseId()).get(0);
-            System.out.println("Franchise: "+f.getName());
+            System.out.println("Name: " + game.getName());
+            System.out.println("Genre: " + game.getGenre());
+            System.out.println("Price: " + game.getPrice());
+            Franchise f = (Franchise) select("Franchises", "Id = " + game.getFranchiseId()).get(0);
+            System.out.println("Franchise: " + f.getName());
             System.out.println("``````````````````````````");
 
         }
@@ -108,4 +110,5 @@ public class Game {
     public void setFranchiseId(int franchiseId) {
         this.franchiseId = franchiseId;
     }
+}
 
