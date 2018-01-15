@@ -31,8 +31,7 @@ public class Main {
             System.out.println("+     [6] Divisions       +");
             System.out.println("+-------------------------+");
             System.out.println("+       [0] Exit          +");
-            System.out.println("+++++++++++++++++++++++++++");
-            chooser = Read.Int();
+            chooser = Read.Int("+++++++++++++++++++++++++++");
             switch (chooser) {
                 case 1:
                     //Games
@@ -49,8 +48,7 @@ public class Main {
                         System.out.println("+-------------------------+");
                         System.out.println("+ To add a new game go to +");
                         System.out.println("+    franchises section   +");
-                        System.out.println("+-------------------------+");
-                        chooser = Read.Int();
+                        chooser = Read.Int("+-------------------------+");
                         switch (chooser) {
                             case 1:
                                 if (games != null) {
@@ -64,8 +62,7 @@ public class Main {
                             case 2:
                                 games.clear();
                                 System.out.println("Searching for a game...");
-                                System.out.println("Type the name of the game:");
-                                String gameName = Read.String();
+                                String gameName = Read.String("Type the name of the game:");
                                 games = select("Games", "Name LIKE '%" + gameName + "%'");
                                 if (games.size() != 0) {
                                     System.out.println(games.size() + " games found:");
