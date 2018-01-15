@@ -103,7 +103,7 @@ public class Game {
             Game game = (Game) g;
             System.out.println("Name: "+game.getName());
             System.out.println("Genre: "+game.getGenre());
-            System.out.println("Price: "+game.getPrice());
+            System.out.println("Price: "+game.getPrice()+ " €");
             Franchise f = (Franchise) select("Franchises","Id = "+game.getFranchiseId()).get(0);
             System.out.println("Franchise: "+f.getName());
             System.out.println("``````````````````````````");
