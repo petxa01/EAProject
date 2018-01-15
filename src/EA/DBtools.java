@@ -91,7 +91,7 @@ public class DBtools {
      * @param value      New value
      * @param condition  WHERE condition
      */
-    private static void update(String table, String columnName, String value, String condition) {
+    public static void update(String table, String columnName, String value, String condition) {
         sqlStmt("UPDATE " + table + " SET " + columnName + " = " + value + " WHERE " + condition, false);
     }
 
@@ -99,7 +99,7 @@ public class DBtools {
      * @param table     Table name
      * @param condition WHERE condition
      */
-    private static void delete(String table, String condition) {
+    public static void delete(String table, String condition) {
         sqlStmt("Delete from " + table + " WHERE " + condition, false);
     }
 
