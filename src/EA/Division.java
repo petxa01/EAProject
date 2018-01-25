@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static EA.DBtools.select;
 import static EA.Tools.returnObjectList;
 import static EA.Tools.sqlStmt;
 
@@ -59,6 +60,13 @@ public class Division {
         String name=Read.String("Enter the name");
 
         sqlStmt("Insert into "+ table +" (Name) VALUES ("+name+")", false);
+    }
+    public static void printDivision(ArrayList<Object> divisions) {
+        for (Object g : divisions) {
+            Division division = (Division) g;
+            System.out.println("Name: " + division.getName());
+
+        }
     }
 
 

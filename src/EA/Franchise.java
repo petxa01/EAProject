@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static EA.DBtools.select;
+import static EA.Studio.printStudio;
 import static EA.Tools.returnObjectList;
 import static EA.Tools.sqlStmt;
 
@@ -66,10 +67,28 @@ public class Franchise {
         }
         return returnObjectList(objectList, exist);
     }
-    //TODO: Completar método con LIKE
-    public static void insertFranchise(){
-        String name=Read.String("Enter the name");
 
+    public static void insertFranchise(){
+        boolean repeat=true;
+        int studioId;
+        String name=Read.String("Enter the name");
+        do {
+            studioId = Read.Int("Type the studio of the franchise:");
+            ArrayList<Object> studio = select("Studios", "Name LIKE '%" + studioId + "%'");
+            if (studio.size() > 1) {
+                System.out.println(studio.size() + " studios found:");
+                printStudio(studio);
+                System.out.println("please specify more");
+                repeat=true;
+            } else if(studio.size()<1) {
+                System.out.println("No studios found try again");
+                repeat=true;
+            }else {
+                repeat = false;
+                Studio s = (Studio) studio.get(0);
+                studioId=s.getId();
+            }
+        }while(repeat);
         sqlStmt("Insert into franchises (Name,StudioId) VALUES ("+name+","+studioId+")", false);
     }
 

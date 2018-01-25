@@ -7,11 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static EA.DBtools.*;
+import static EA.Division.printDivision;
 import static EA.Game.printGame;
 import static EA.Tools.returnObjectList;
 import static EA.Tools.sqlStmt;
 
 public class Studio {
+
     private int id;
     private String name;
     private String country;
@@ -50,12 +52,42 @@ public class Studio {
         return returnObjectList(objectList, exist);
     }
 
-    public static void insertStudios(String table, int divisionId) {
-
+    public static void insertStudios(String table) {
         String name = Read.String("Enter the name");
         String country = Read.String("Enter the country");
+        int divisionId;
+        boolean repeat;
+        do {
+            divisionId = Read.Int("Type the divison of the studio:");
+            ArrayList<Object> division = select("Divisions", "Name LIKE '%" + divisionId + "%'");
+            if (division.size() > 1) {
+                System.out.println(division.size() + " divisions found:");
+                printDivision(division);
+                System.out.println("please specify more");
+                repeat=true;
+            } else if(division.size()<1) {
+                System.out.println("No divisons found try again");
+                repeat=true;
+            }else {
+                repeat = false;
+                Division d = (Division) division.get(0);
+                divisionId=d.getId();
+            }
+        }while(repeat);
 
         sqlStmt("Insert into " + table + " (Name,Country,DivisionId) VALUES (" + name + "," + country + "," + divisionId + ")", false);
+    }
+
+    public static void printStudio(ArrayList<Object> studios) {
+        for (Object g : studios) {
+            Studio studio = (Studio) g;
+            System.out.println("Name: " + studio.getName());
+            System.out.println("Country: " + studio.getCountry());
+            Division d = (Division) select("Division", "Id = " + studio.getDivisionId()).get(0);
+            System.out.println("Division: " + d.getName());
+            System.out.println("``````````````````````````");
+
+        }
     }
 
     public static void updateStudios() {

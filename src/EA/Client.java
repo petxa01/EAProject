@@ -61,6 +61,11 @@ public class Client {
         sqlStmt("Insert into "+ table +" (Name, Category,IdCard) VALUES ("+name+","+category+","+idCard+")", false);
     }
 
+    public static void deleteClients(){
+
+    }
+
+
     public String getCategory() {
         return category;
     }

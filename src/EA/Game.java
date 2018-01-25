@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static EA.DBtools.select;
+import static EA.Division.printDivision;
+import static EA.Franchise.printFranchise;
 import static EA.Tools.returnObjectList;
 import static EA.Tools.sqlStmt;
 
@@ -50,10 +52,29 @@ public class Game {
         return returnObjectList(objectList, exist);
     }
 
-    public static void insertGames(String table, int franchiseId) {
+    public static void insertGames(String table) {
         String name = Read.String("Enter the name");
         String genre = Read.String("Enter the genre");
         float price = Read.Float("Enter the price");
+        int franchiseId;
+        boolean repeat;
+        do {
+            franchiseId = Read.Int("Type the franchise of the game:");
+            ArrayList<Object> franchise = select("Franchises", "Name LIKE '%" + franchiseId + "%'");
+            if (franchise.size() > 1) {
+                System.out.println(franchise.size() + " franchises found:");
+                printFranchise(franchise);
+                System.out.println("please specify more");
+                repeat=true;
+            } else if(franchise.size()<1) {
+                System.out.println("No franchises found try again");
+                repeat=true;
+            }else {
+                repeat = false;
+                Franchise d = (Franchise) franchise.get(0);
+                franchiseId=d.getId();
+            }
+        }while(repeat);
 
         sqlStmt("Insert into " + table + " (Name,Genre,Price,FranchiseId) VALUES (" + name + "," + genre + "," + price + "," + franchiseId + ")", false);
     }
