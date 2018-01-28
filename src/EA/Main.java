@@ -3,10 +3,13 @@ package EA;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static EA.DBtools.delete;
 import static EA.DBtools.select;
 import static EA.Franchise.insertFranchise;
 import static EA.Franchise.printFranchise;
 import static EA.Game.printGame;
+import static EA.Studio.insertStudios;
+import static EA.Studio.printStudio;
 import static EA.Tools.cls;
 
 public class Main {
@@ -121,6 +124,7 @@ public class Main {
                 case 3:
                     //Studios
                     cls();
+                    ArrayList<Object> studios = null;
                     System.out.println("++++++++++++++STUDIOS+++++++++++++++");
                     System.out.println("+         [1] Studio List          +");
                     System.out.println("+----------------------------------+");
@@ -133,7 +137,21 @@ public class Main {
                     System.out.println("+        [6] Edit Studio           +");
                     System.out.println("+----------------------------------+");
                     System.out.println("+            [0] Back              +");
-                    System.out.println("++++++++++++++++++++++++++++++++++++");
+                    chooser = Read.Int("++++++++++++++++++++++++++++++++++++");
+                    switch (chooser) {
+                        case 1:
+                            studios = select("Studios");
+                            System.out.println("Studio list:");
+                            System.out.println("``````````````````````````");
+                            printStudio(studios);
+                            Read.Pause();
+                            break;
+                        case 2:
+                                insertStudios("Studio");
+                                break;
+                        case 3:
+
+                    }
                     break;
                 case 4:
                     //Developers
@@ -151,17 +169,19 @@ public class Main {
                     System.out.println("+   [8] List of Developing Games      +");
                     System.out.println("+-------------------------------------+");
                     System.out.println("+            [0] Back                 +");
-                    System.out.println("+++++++++++++++++++++++++++++++++++++++");
+                    chooser = Read.Int("+++++++++++++++++++++++++++++++++++++++");
                     break;
                 case 5:
                     //Clients
                     cls();
-                    System.out.println("[1] Client list");
-                    System.out.println("[2] Add new client");
-                    System.out.println("[3] Delete client");
-                    System.out.println("[4] Edit client");
-                    System.out.println("---------------");
-                    System.out.println("[0] Back");
+                    System.out.println("++++++++++++++CLIENTS+++++++++++++++");
+                    System.out.println("+       [1] Client list            +");
+                    System.out.println("+      [2] Add new client          +");
+                    System.out.println("+       [3] Delete client          +");
+                    System.out.println("+        [4] Edit client           +");
+                    System.out.println("+----------------------------------+");
+                    System.out.println("+            [0] Back              +");
+                    chooser = Read.Int("++++++++++++++++++++++++++++++++++++");
                     break;
                 case 6:
                     //Divisions
@@ -172,6 +192,7 @@ public class Main {
                     System.out.println("[4] Edit division");
                     System.out.println("---------------");
                     System.out.println("[0] Back");
+                    chooser = Read.Int("++++++++++++++++++++++++++++++++++++");
                     break;
                 case 0:
                     repeatAll = false;
