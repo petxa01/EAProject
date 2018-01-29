@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="EAHibernate.Studios" table="studios" schema="ea">
+        <id name="id">
+            <column name="Id" sql-type="int(11)"/>
+        </id>
+        <property name="name">
+            <column name="Name" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="country">
+            <column name="Country" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="divisionId">
+            <column name="DivisionId" sql-type="int(11)" not-null="true"/>
+        </property>
+        <many-to-one name="divisionsByDivisionId" class="EAHibernate.Divisions">
+            <column name="DivisionId" not-null="true"/>
+        </many-to-one>
+        <set name="franchisesById" inverse="true">
+            <key>
+                <column name="StudioId" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="EAHibernate.Franchises"/>
+        </set>
+    </class>
+</hibernate-mapping>

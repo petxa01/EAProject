@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="EAHibernate.Clients" table="clients" schema="ea">
+        <id name="id">
+            <column name="Id" sql-type="int(11)"/>
+        </id>
+        <property name="name">
+            <column name="Name" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="category">
+            <column name="Category" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="idCard">
+            <column name="IdCard" sql-type="varchar(45)" length="45"/>
+        </property>
+        <set name="salesById" inverse="true">
+            <key>
+                <column name="ClientId" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="EAHibernate.Sales"/>
+        </set>
+    </class>
+</hibernate-mapping>

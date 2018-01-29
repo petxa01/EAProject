@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static EA.DBtools.select;
+import static EA.Game.printGame;
 import static EA.Tools.returnObjectList;
 import static EA.Tools.sqlStmt;
 
@@ -62,7 +64,37 @@ public class Client {
     }
 
     public static void deleteClients(){
+        int clientId;
+        boolean repeat;
+        do {
+            clientId = Read.Int("Type the id card of the client you want to delete:");
+            ArrayList<Object> client = select("Clients", "IdCard LIKE '%" + clientId + "%'");
+            if (client.size() > 1) {
+                System.out.println(client.size() + " clients found:");
+                printClient(client);
+                System.out.println("please specify more");
+                repeat = true;
+            } else if (client.size() < 1) {
+                System.out.println("No Clients found try again");
+                repeat = true;
+            } else {
+                repeat = false;
+                Client c = (Client) client.get(0);
+                clientId = c.getId();
+            }
+        } while (repeat);
+        sqlStmt("delete from clients where id= "+ clientId,false);
 
+    }
+    public static void printClient(ArrayList<Object> clients){
+        for (Object f : clients) {
+            Client client = (Client) f;
+            System.out.println("Name: " + client.getName());
+            System.out.printf("Id Card: " + client.getIdCard());
+            System.out.println("Category: " + client.getCategory());
+
+            System.out.println("``````````````````````````");
+        }
     }
 
 
