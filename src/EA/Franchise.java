@@ -27,10 +27,13 @@ public class Franchise {
         this.studioId = studioId;
     }
 
-    public static void addGame() throws IOException {//TODO:Esto está sin terminar
+    public static void addGame() throws IOException {
+        //TODO:Esto está sin terminar
         boolean repeat = false;
+        Game g = null;
+        Franchise f;
         int gameId = 0;
-
+        int franId = 0;
         do {
             String name = Read.String("Type the name of the game:");
             ArrayList<Object> games = select("games", "Name LIKE '%" + name + "%'");
@@ -44,10 +47,29 @@ public class Franchise {
                 repeat = true;
             } else {
                 repeat = false;
-                Game g = (Game) games.get(0);
+                g = (Game) games.get(0);
                 gameId = g.getId();
-                delete("games","Id = "+gameId);
-                System.out.println(g.getName() + " has been deleted");
+            }
+
+        } while (repeat);
+        repeat = true;
+        do {
+            String name = Read.String("Now type the name of the franchise:");
+            ArrayList<Object> franchises = select("franchises", "Name LIKE '%" + name + "%'");
+            if (franchises.size() > 1) {
+                System.out.println(franchises.size() + " franchises found:");
+                printFranchise(franchises);
+                System.out.println("please specify more");
+                repeat = true;
+            } else if (franchises.size() < 1) {
+                System.out.println("No franchises found try again");
+                repeat = true;
+            } else {
+                repeat = false;
+                f = (Franchise) franchises.get(0);
+                franId = f.getId();
+                update("Games","FranchiseId", Integer.toString(franId),"Id = "+gameId);
+                System.out.println(g.getName()+" has been added to "+f.getName()+" franchise");
                 Read.Pause();
             }
 

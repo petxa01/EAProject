@@ -5,9 +5,7 @@ import java.util.ArrayList;
 
 import static EA.DBtools.delete;
 import static EA.DBtools.select;
-import static EA.Franchise.deleteFranchise;
-import static EA.Franchise.insertFranchise;
-import static EA.Franchise.printFranchise;
+import static EA.Franchise.*;
 import static EA.Game.deleteGame;
 import static EA.Game.printGame;
 import static EA.Studio.insertStudios;
@@ -123,7 +121,9 @@ public class Main {
                             deleteFranchise();
                             break;
                         case 4:
-
+                            addGame();
+                            break;
+                            case
 
                     }
                     break;
