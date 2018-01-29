@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static EA.DBtools.select;
+import static EA.DBtools.update;
 import static EA.Game.printGame;
 import static EA.Tools.returnObjectList;
 import static EA.Tools.sqlStmt;
@@ -84,6 +85,48 @@ public class Client {
             }
         } while (repeat);
         sqlStmt("delete from clients where id= "+ clientId,false);
+
+    }
+
+    public static void updateClient(){
+        boolean repeat;
+        int clientId, menu;
+        String column, value;
+        do {
+            clientId = Read.Int("Type the id card of the client you want to update:");
+            ArrayList<Object> developers = select("Clients", "IdCard LIKE '%" + clientId + "%'");
+            if (developers.size() > 1) {
+                System.out.println(developers.size() + " clients found:");
+                printGame(developers);
+                System.out.println("please specify more");
+                repeat = true;
+            } else if (developers.size() < 1) {
+                System.out.println("No clients found try again");
+                repeat = true;
+            } else {
+                repeat = false;
+                Developer d = (Developer) developers.get(0);
+                clientId = d.getId();
+            }
+        } while (repeat);
+        do {
+            System.out.println("Choose what do you want to change");
+            System.out.println("1- Name");
+            menu = Read.Int("2- Category");
+        }while(menu<1 || menu>2);
+        switch (menu){
+            case 1:
+                column="Name";
+                break;
+            case 2:
+                column="Category";
+                break;
+            default:
+                column="";
+        }
+        value=Read.String("Enter the new value");
+        update("Clients",column,value,"id="+clientId);
+
 
     }
     public static void printClient(ArrayList<Object> clients){

@@ -167,6 +167,7 @@ public class Developer {
     public static void updateDeveloper(){
         boolean repeat;
         int devId, menu;
+        String column, value;
         do {
             devId = Read.Int("Type the id card of the developer you want to update:");
             ArrayList<Object> developers = select("Developers", "IdCard LIKE '%" + devId + "%'");
@@ -184,18 +185,35 @@ public class Developer {
                 devId = d.getId();
             }
         } while (repeat);
-        do{
-        System.out.println("Choose what dou you want to change");
-        System.out.println("1- Name");
-        System.out.println("2- Surname");
-        System.out.println("3- Salary");
-        System.out.println("4- job");
-        menu=Read.Int("5- Country");
-        while(menu<1 || menu>5);
+        do {
+            System.out.println("Choose what do you want to change");
+            System.out.println("1- Name");
+            System.out.println("2- Surname");
+            System.out.println("3- Salary");
+            System.out.println("4- job");
+            menu = Read.Int("5- Country");
+        }while(menu<1 || menu>5);
         switch (menu){
             case 1:
+                column="Name";
+                break;
+            case 2:
+                column="Surname";
+                break;
+            case 3:
+                column="Salary";
+                break;
+            case 4:
+                column="Job";
+                break;
+            case 5:
+                column="Country";
+                break;
+            default:
+                column="";
         }
-        update("Developers",);
+        value=Read.String("Enter the new value");
+        update("Developers",column,value,"id="+devId);
 
 
     }
