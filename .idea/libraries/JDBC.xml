@@ -2,8 +2,10 @@
   <library name="JDBC">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/JDBC.jar!/" />
+      <root url="file://$PROJECT_DIR$/.idea/libraries/hibernate" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/.idea/libraries/hibernate" recursive="false" />
   </library>
 </component>

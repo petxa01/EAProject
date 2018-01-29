@@ -1,10 +1,13 @@
 package EA;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static EA.DBtools.delete;
 import static EA.DBtools.select;
+import static EA.DBtools.update;
 import static EA.Division.printDivision;
 import static EA.Franchise.printFranchise;
 import static EA.Tools.returnObjectList;
@@ -65,19 +68,48 @@ public class Game {
                 System.out.println(franchise.size() + " franchises found:");
                 printFranchise(franchise);
                 System.out.println("please specify more");
-                repeat=true;
-            } else if(franchise.size()<1) {
+                repeat = true;
+            } else if (franchise.size() < 1) {
                 System.out.println("No franchises found try again");
-                repeat=true;
-            }else {
+                repeat = true;
+            } else {
                 repeat = false;
                 Franchise d = (Franchise) franchise.get(0);
-                franchiseId=d.getId();
+                franchiseId = d.getId();
             }
-        }while(repeat);
+        } while (repeat);
 
         sqlStmt("Insert into " + table + " (Name,Genre,Price,FranchiseId) VALUES (" + name + "," + genre + "," + price + "," + franchiseId + ")", false);
     }
+
+    public static void deleteGame() throws IOException {
+
+        boolean repeat = false;
+        int gameId = 0;
+
+        do {
+            String name = Read.String("Type the name of the game:");
+            ArrayList<Object> games = select("games", "Name LIKE '%" + name + "%'");
+            if (games.size() > 1) {
+                System.out.println(games.size() + " games found:");
+                printGame(games);
+                System.out.println("please specify more");
+                repeat = true;
+            } else if (games.size() < 1) {
+                System.out.println("No games found try again");
+                repeat = true;
+            } else {
+                repeat = false;
+                Game g = (Game) games.get(0);
+                gameId = g.getId();
+                delete("games", "Id = " + gameId);
+                System.out.println(g.getName() + " has been deleted");
+                Read.Pause();
+            }
+
+        } while (repeat);
+    }
+
 
     public static void printGame(ArrayList<Object> games) {
         for (Object g : games) {
