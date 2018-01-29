@@ -46,53 +46,45 @@ public class Franchise {
                 repeat = false;
                 g = (Game) games.get(0);
                 gameId = g.getId();
-                update("Games","FranchiseId","null","Id = "+gameId);
+                update("Games", "FranchiseId", "null", "Id = " + gameId);
                 System.out.println(g.getName() + " is not in a franchise anymore");
                 Read.Pause();
             }
 
         } while (repeat);
     }
-    public static void updateFranchise() {
-        boolean repeat = false;
-        int studioId = 0;
-        String value = "";
-        do {
-            do {
-                String name = Read.String("Type the name of the studio:");
-                ArrayList<Object> studios = select("studios", "IdCard LIKE '%" + name + "%'");
-                if (studios.size() > 1) {
-                    System.out.println(studios.size() + " clients found:");
-                    printGame(studios);
-                    System.out.println("please specify more");
-                    repeat = true;
-                } else if (studios.size() < 1) {
-                    System.out.println("No clients found try again");
-                    repeat = true;
-                } else {
-                    repeat = false;
-                    Studio c = (Studio) studios.get(0);
-                    studioId = c.getId();
 
-                }
-            } while (repeat);
-            System.out.println("Enter what field you wish to change");
-            System.out.println("+            [1] name             +");
-            int option = Read.Int("+           [2] Country           +");
-            switch (option) {
-                case 1:
-                    value = Read.String("Enter the new name");
-                    break;
-                case 2:
-                    value = Read.String("Enter the new country");
-                    break;
-                default:
-                    System.out.println("You have to enter a valid number");
-                    repeat = true;
+    public static void updateFranchise() throws IOException {
+        boolean repeat = false;
+        int franId = 0;
+        String value = "";
+
+        do {
+            String name = Read.String("Type the name of the franchise:");
+            ArrayList<Object> franchises = select("franchises", "Name LIKE '%" + name + "%'");
+            if (franchises.size() > 1) {
+                System.out.println(franchises.size() + " franchises found:");
+                printFranchise(franchises);
+                System.out.println("please specify more");
+                repeat = true;
+            } else if (franchises.size() < 1) {
+                System.out.println("No franchises found try again");
+                repeat = true;
+            } else {
+                repeat = false;
+                Franchise f = (Franchise) franchises.get(0);
+                franId = f.getId();
+                value = Read.String("Enter the new name for \"" + f.getName() + "\": ");
+                update("franchises", "name", value, "Id = " + f.getId());
+                System.out.println("Done");
+                Read.Pause();
+
             }
         } while (repeat);
-        update("Studios", "Name", value, "id=" + studioId);
+
+
     }
+
     public static void addGame() throws IOException {
         boolean repeat = false;
         Game g = null;
@@ -133,8 +125,8 @@ public class Franchise {
                 repeat = false;
                 f = (Franchise) franchises.get(0);
                 franId = f.getId();
-                update("Games","FranchiseId", Integer.toString(franId),"Id = "+gameId);
-                System.out.println(g.getName()+" has been added to "+f.getName()+" franchise");
+                update("Games", "FranchiseId", Integer.toString(franId), "Id = " + gameId);
+                System.out.println(g.getName() + " has been added to " + f.getName() + " franchise");
                 Read.Pause();
             }
 
@@ -164,6 +156,7 @@ public class Franchise {
     public void setStudioId(int studioId) {
         this.studioId = studioId;
     }
+
     public static ArrayList<Object> selectFranchises(ResultSet res, boolean exist) {
         ArrayList<Object> objectList = new ArrayList();
         try {
@@ -186,10 +179,10 @@ public class Franchise {
         return returnObjectList(objectList, exist);
     }
 
-    public static void insertFranchise(){
-        boolean repeat=true;
+    public static void insertFranchise() {
+        boolean repeat = true;
         int studioId;
-        String name=Read.String("Enter the name");
+        String name = Read.String("Enter the name");
         do {
             studioId = Read.Int("Type the studio of the franchise:");
             ArrayList<Object> studio = select("Studios", "Name LIKE '%" + studioId + "%'");
@@ -197,79 +190,58 @@ public class Franchise {
                 System.out.println(studio.size() + " studios found:");
                 printStudio(studio);
                 System.out.println("please specify more");
-                repeat=true;
-            } else if(studio.size()<1) {
+                repeat = true;
+            } else if (studio.size() < 1) {
                 System.out.println("No studios found try again");
-                repeat=true;
-            }else {
+                repeat = true;
+            } else {
                 repeat = false;
                 Studio s = (Studio) studio.get(0);
-                studioId=s.getId();
+                studioId = s.getId();
             }
-        }while(repeat);
-        sqlStmt("Insert into franchises (Name,StudioId) VALUES ("+name+","+studioId+")", false);
+        } while (repeat);
+        sqlStmt("Insert into franchises (Name,StudioId) VALUES (" + name + "," + studioId + ")", false);
     }
 
     public static void deleteFranchise() throws IOException {
 
 
-            boolean repeat = false;
-            int franid = 0;
+        boolean repeat = false;
+        int franid = 0;
 
-            do {
-                String name = Read.String("Type the name of the franchise:");
-                ArrayList<Object> franchises = select("franchises", "Name LIKE '%" + name + "%'");
-                if (franchises.size() > 1) {
-                    System.out.println(franchises.size() + " franchises found:");
-                    printFranchise(franchises);
-                    System.out.println("please specify more");
-                    repeat = true;
-                } else if (franchises.size() < 1) {
-                    System.out.println("No franchises found try again");
-                    repeat = true;
-                } else {
-                    repeat = false;
-                    Franchise f = (Franchise) franchises.get(0);
-                    franid = f.getId();
-                    update("Games","FranchiseId","null","FranchiseId = "+franid);
-                    delete("franchises","Id = "+franid);
-                    System.out.println(f.getName() + " has been deleted");
-                    Read.Pause();
-                }
+        do {
+            String name = Read.String("Type the name of the franchise:");
+            ArrayList<Object> franchises = select("franchises", "Name LIKE '%" + name + "%'");
+            if (franchises.size() > 1) {
+                System.out.println(franchises.size() + " franchises found:");
+                printFranchise(franchises);
+                System.out.println("please specify more");
+                repeat = true;
+            } else if (franchises.size() < 1) {
+                System.out.println("No franchises found try again");
+                repeat = true;
+            } else {
+                repeat = false;
+                Franchise f = (Franchise) franchises.get(0);
+                franid = f.getId();
+                update("Games", "FranchiseId", "null", "FranchiseId = " + franid);
+                delete("franchises", "Id = " + franid);
+                System.out.println(f.getName() + " has been deleted");
+                Read.Pause();
+            }
 
-            } while (repeat);
-        }
+        } while (repeat);
+    }
 
     public static void printFranchise(ArrayList<Object> franchises) {
-        for (Object f:franchises) {
+        for (Object f : franchises) {
             Franchise franchise = (Franchise) f;
-            System.out.println("Name: "+franchise.getName());
-            Studio s = (Studio) select("Studios","Id = "+franchise.getStudioId()).get(0);
-            System.out.println("\tStudio: "+s.getName());
+            System.out.println("Name: " + franchise.getName());
+            Studio s = (Studio) select("Studios", "Id = " + franchise.getStudioId()).get(0);
+            System.out.println("\tStudio: " + s.getName());
             System.out.println("``````````````````````````");
         }
     }
-    public static void deleteFranchise(){
-        int franchiseId;
-        boolean repeat;
-        do {
-            franchiseId = Read.Int("Type the franchise you want to delete:");
-            ArrayList<Object> franchise = select("Franchises", "Name LIKE '%" + franchiseId + "%'");
-            if (franchise.size() > 1) {
-                System.out.println(franchise.size() + " franchises found:");
-                printFranchise(franchise);
-                System.out.println("please specify more");
-                repeat=true;
-            } else if(franchise.size()<1) {
-                System.out.println("No franchises found try again");
-                repeat=true;
-            }else {
-                repeat = false;
-                Franchise d = (Franchise) franchise.get(0);
-                franchiseId=d.getId();
-            }
-        }while(repeat);
-        sqlStmt("delete from franchises where id ="+franchiseId,false);
-    }
+
 
 }
