@@ -77,4 +77,5 @@ public class Clients {
     public void setSalesById(Collection<Sales> salesById) {
         this.salesById = salesById;
     }
+
 }

@@ -1,10 +1,13 @@
 package EA;
 
+import com.sun.org.apache.bcel.internal.generic.Select;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static EA.DBtools.select;
+import static EA.DBtools.update;
 import static EA.Game.printGame;
 import static EA.Tools.returnObjectList;
 import static EA.Tools.sqlStmt;
@@ -160,5 +163,41 @@ public class Developer {
             }
         } while (repeat);
         sqlStmt("delete from developers where id="+devId,false);
+    }
+    public static void updateDeveloper(){
+        boolean repeat;
+        int devId, menu;
+        String 
+        do {
+            devId = Read.Int("Type the id card of the developer you want to update:");
+            ArrayList<Object> developers = select("Developers", "IdCard LIKE '%" + devId + "%'");
+            if (developers.size() > 1) {
+                System.out.println(developers.size() + " developers found:");
+                printGame(developers);
+                System.out.println("please specify more");
+                repeat = true;
+            } else if (developers.size() < 1) {
+                System.out.println("No developers found try again");
+                repeat = true;
+            } else {
+                repeat = false;
+                Developer d = (Developer) developers.get(0);
+                devId = d.getId();
+            }
+        } while (repeat);
+        do{
+        System.out.println("Choose what dou you want to change");
+        System.out.println("1- Name");
+        System.out.println("2- Surname");
+        System.out.println("3- Salary");
+        System.out.println("4- job");
+        menu=Read.Int("5- Country");
+        while(menu<1 || menu>5);
+        switch (menu){
+            case 1:
+        }
+        update("Developers",);
+
+
     }
 }

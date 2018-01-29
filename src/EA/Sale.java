@@ -141,6 +141,7 @@ public class Sale {
     }
 
 
+
     public int getId() {
         return id;
     }

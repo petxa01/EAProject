@@ -142,16 +142,18 @@ public class Studio {
             switch (option) {
                 case 1:
                     value = Read.String("Enter the new name");
+                    update("Studios", "Name", value, "id=" + studioId);
                     break;
                 case 2:
                     value = Read.String("Enter the new country");
+                    update("Studios", "Country", value, "id=" + studioId);
                     break;
                 default:
                     System.out.println("You have to enter a valid number");
                     repeat = true;
             }
         } while (repeat);
-        update("Studios", "Name", value, "id=" + studioId);
+
     }
 
 
