@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static EA.DBtools.select;
+import static EA.Developer.printDeveloper;
 import static EA.Game.printGame;
 import static EA.Tools.returnObjectList;
 import static EA.Tools.sqlStmt;
@@ -76,7 +77,7 @@ public class Develop {
             ArrayList<Object> developers = select("Developers", "IdCard LIKE '%" + devId + "%'");
             if (developers.size() > 1) {
                 System.out.println(developers.size() + " developers found:");
-                printGame(developers);
+                printDeveloper(developers);
                 System.out.println("please specify more");
                 repeat=true;
             } else if(developers.size()<1) {
@@ -91,6 +92,47 @@ public class Develop {
         boolean finished=Read.Boolean("Enter the game status(true if finished)");
 
         sqlStmt("Insert into "+ table +" (DeveloperID, GameID,Finished) VALUES ("+devId+","+gameId+","+finished+")", false);
+    }
+
+    public static void deleteDevelop(){
+        boolean repeat;
+        int gameId;
+        int devId;
+        do {
+            gameId = Read.Int("Type the name of the game you want to delete from the table develop:");
+            ArrayList<Object> games = select("Games", "Name LIKE '%" + gameId + "%'");
+            if (games.size() > 1) {
+                System.out.println(games.size() + " games found:");
+                printGame(games);
+                System.out.println("please specify more");
+                repeat=true;
+            } else if(games.size()<1) {
+                System.out.println("No games found try again");
+                repeat=true;
+            }else {
+                repeat = false;
+                Game g = (Game) games.get(0);
+                gameId=g.getId();
+            }
+        }while(repeat);
+        do {
+            devId = Read.Int("Type the id card of the developer you want to delete from the table develops:");
+            ArrayList<Object> developers = select("Developers", "IdCard LIKE '%" + devId + "%'");
+            if (developers.size() > 1) {
+                System.out.println(developers.size() + " developers found:");
+                printDeveloper(developers);
+                System.out.println("please specify more");
+                repeat=true;
+            } else if(developers.size()<1) {
+                System.out.println("No developers found try again");
+                repeat=true;
+            }else {
+                repeat = false;
+                Developer d = (Developer) developers.get(0);
+                devId=d.getId();
+            }
+        }while(repeat);
+        sqlStmt("delete from develop where developerId = "+devId+"gameId ="+gameId,false);
     }
 
     public int getDeveloperId() {

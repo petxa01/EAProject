@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static EA.DBtools.select;
+import static EA.Game.printGame;
 import static EA.Tools.returnObjectList;
 import static EA.Tools.sqlStmt;
 
@@ -29,16 +31,16 @@ public class Developer {
         this.country = country;
     }
 
-    public static void insertDevelopers(String table){
-        String idCard=Read.String("Enter the ID Card");
-        String name=Read.String("Enter the name");
-        String surname=Read.String("Enter the surname");
+    public static void insertDevelopers(String table) {
+        String idCard = Read.String("Enter the ID Card");
+        String name = Read.String("Enter the name");
+        String surname = Read.String("Enter the surname");
         float salary = Read.Float("Enter the salary");
         String job = Read.String("Enter the job");
-        String country =Read.String("Enter the country");
+        String country = Read.String("Enter the country");
 
 
-        sqlStmt("Insert into "+ table +" (IdCard, Name,Surname,Salary,Job,Country) VALUES ("+idCard+","+name+","+surname+","+salary+","+job+","+country+")", false);
+        sqlStmt("Insert into " + table + " (IdCard, Name,Surname,Salary,Job,Country) VALUES (" + idCard + "," + name + "," + surname + "," + salary + "," + job + "," + country + ")", false);
     }
 
     public int getId() {
@@ -120,5 +122,43 @@ public class Developer {
             System.out.println("SQL EXCEPTION");
         }
         return returnObjectList(objectList, exist);
+    }
+
+    public static void printDeveloper(ArrayList<Object> developers) {
+        for (Object f : developers) {
+            Developer developer = (Developer) f;
+            System.out.printf("Id Card: " + developer.getIdCard());
+            System.out.println("Name: " + developer.getName());
+            System.out.println("Surname: " + developer.getSurname());
+            System.out.println("Salary: " + developer.getSalary());
+            System.out.println("Job: " + developer.getJob());
+            System.out.println("Country: " + developer.getCountry());
+
+            System.out.println("``````````````````````````");
+        }
+    }
+
+    public static void deleteDeveloper() {
+        boolean repeat;
+        int devId;
+
+        do {
+            devId = Read.Int("Type the id card of the developer:");
+            ArrayList<Object> developers = select("Developers", "IdCard LIKE '%" + devId + "%'");
+            if (developers.size() > 1) {
+                System.out.println(developers.size() + " developers found:");
+                printGame(developers);
+                System.out.println("please specify more");
+                repeat = true;
+            } else if (developers.size() < 1) {
+                System.out.println("No developers found try again");
+                repeat = true;
+            } else {
+                repeat = false;
+                Developer d = (Developer) developers.get(0);
+                devId = d.getId();
+            }
+        } while (repeat);
+        sqlStmt("delete from developers where id="+devId,false);
     }
 }

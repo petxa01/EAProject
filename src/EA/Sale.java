@@ -55,7 +55,7 @@ public class Sale {
     }
 
     public static void insertSales(String table){
-        boolean repeat=false;
+        boolean repeat;
         int gameId=0, clientId=0;
         System.out.println();
         int quantity=Read.Int("Enter the quantity");
@@ -99,6 +99,45 @@ public class Sale {
 
 
         sqlStmt("Insert into "+ table +" (Quantity,Date,GameId,ClientId) VALUES ("+quantity+","+date+","+gameId+","+clientId+")", false);
+    }
+    public static void deleteSale(){
+        boolean repeat;
+        int gameId=0, clientId=0;
+        do {
+            String gameName = Read.String("Type the name of the game:");
+            ArrayList<Object> games = select("Games", "Name LIKE '%" + gameName + "%'");
+            if (games.size() > 1) {
+                System.out.println(games.size() + " games found:");
+                printGame(games);
+                System.out.println("please specify more");
+                repeat=true;
+            } else if(games.size()<1) {
+                System.out.println("No games found try again");
+                repeat=true;
+            }else {
+                repeat = false;
+                Game g = (Game) games.get(0);
+                gameId=g.getId();
+            }
+        }while(repeat);
+        do {
+            int cardId = Read.Int("Type the id card of the client:");
+            ArrayList<Object> clients = select("Clients", "IdCard LIKE '%" + cardId + "%'");
+            if (clients.size() > 1) {
+                System.out.println(clients.size() + " clients found:");
+                printGame(clients);
+                System.out.println("please specify more");
+                repeat=true;
+            } else if(clients.size()<1) {
+                System.out.println("No clients found try again");
+                repeat=true;
+            }else {
+                repeat = false;
+                Client c = (Client) clients.get(0);
+                clientId=c.getId();
+            }
+        }while(repeat);
+        sqlStmt("Delete from sales where gameid = "+gameId+"and client id = "+clientId,false);
     }
 
 

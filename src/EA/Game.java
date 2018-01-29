@@ -52,7 +52,7 @@ public class Game {
         return returnObjectList(objectList, exist);
     }
 
-    public static void insertGames(String table) {
+    public static void insertGames() {
         String name = Read.String("Enter the name");
         String genre = Read.String("Enter the genre");
         float price = Read.Float("Enter the price");
@@ -76,7 +76,31 @@ public class Game {
             }
         }while(repeat);
 
-        sqlStmt("Insert into " + table + " (Name,Genre,Price,FranchiseId) VALUES (" + name + "," + genre + "," + price + "," + franchiseId + ")", false);
+        sqlStmt("Insert into games (Name,Genre,Price,FranchiseId) VALUES (" + name + "," + genre + "," + price + "," + franchiseId + ")", false);
+    }
+
+    public static void deleteGames(){
+        boolean repeat;
+        int gameId;
+        do {
+            gameId = Read.Int("Type the name of the game you want to delete:");
+            ArrayList<Object> games = select("Games", "Name LIKE '%" + gameId + "%'");
+            if (games.size() > 1) {
+                System.out.println(games.size() + " games found:");
+                printGame(games);
+                System.out.println("please specify more");
+                repeat=true;
+            } else if(games.size()<1) {
+                System.out.println("No games found try again");
+                repeat=true;
+            }else {
+                repeat = false;
+                Game g = (Game) games.get(0);
+                gameId=g.getId();
+            }
+        }while(repeat);
+
+        sqlStmt("Delete from games where id="+gameId,false);
     }
 
     public static void printGame(ArrayList<Object> games) {

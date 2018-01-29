@@ -68,6 +68,28 @@ public class Division {
 
         }
     }
+    public static void deleteDivision(){
+        int divisionId;
+        boolean repeat;
+        do {
+            divisionId = Read.Int("Type the divison you want to delete:");
+            ArrayList<Object> division = select("Divisions", "Name LIKE '%" + divisionId + "%'");
+            if (division.size() > 1) {
+                System.out.println(division.size() + " divisions found:");
+                printDivision(division);
+                System.out.println("please specify more");
+                repeat=true;
+            } else if(division.size()<1) {
+                System.out.println("No divisons found try again");
+                repeat=true;
+            }else {
+                repeat = false;
+                Division d = (Division) division.get(0);
+                divisionId=d.getId();
+            }
+        }while(repeat);
+        sqlStmt("delkete from divisions where id = "+divisionId,false);
+    }
 
 
 }

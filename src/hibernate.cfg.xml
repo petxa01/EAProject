@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://localhost:3306/ea</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <mapping resource="EAHibernate/Clients.hbm.xml"/>
+        <mapping class="EAHibernate.Clients"/>
+        <mapping class="EAHibernate.Developers"/>
+        <mapping resource="EAHibernate/Developers.hbm.xml"/>
+        <mapping resource="EAHibernate/Develops.hbm.xml"/>
+        <mapping class="EAHibernate.Develops"/>
+        <mapping resource="EAHibernate/Divisions.hbm.xml"/>
+        <mapping class="EAHibernate.Divisions"/>
+        <mapping class="EAHibernate.Franchises"/>
+        <mapping resource="EAHibernate/Franchises.hbm.xml"/>
+        <mapping class="EAHibernate.Games"/>
+        <mapping resource="EAHibernate/Games.hbm.xml"/>
+        <mapping class="EAHibernate.Sales"/>
+        <mapping resource="EAHibernate/Sales.hbm.xml"/>
+        <mapping class="EAHibernate.Studios"/>
+        <mapping resource="EAHibernate/Studios.hbm.xml"/>
+        <!-- <property name="connection.username"/> -->
+        <!-- <property name="connection.password"/> -->
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

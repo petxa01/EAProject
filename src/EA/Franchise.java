@@ -99,8 +99,29 @@ public class Franchise {
             Studio s = (Studio) select("Studios","Id = "+franchise.getStudioId()).get(0);
             System.out.println("\tStudio: "+s.getName());
             System.out.println("``````````````````````````");
-
         }
+    }
+    public static void deleteFranchise(){
+        int franchiseId;
+        boolean repeat;
+        do {
+            franchiseId = Read.Int("Type the franchise you want to delete:");
+            ArrayList<Object> franchise = select("Franchises", "Name LIKE '%" + franchiseId + "%'");
+            if (franchise.size() > 1) {
+                System.out.println(franchise.size() + " franchises found:");
+                printFranchise(franchise);
+                System.out.println("please specify more");
+                repeat=true;
+            } else if(franchise.size()<1) {
+                System.out.println("No franchises found try again");
+                repeat=true;
+            }else {
+                repeat = false;
+                Franchise d = (Franchise) franchise.get(0);
+                franchiseId=d.getId();
+            }
+        }while(repeat);
+        sqlStmt("delete from franchises where id ="+franchiseId,false);
     }
 
 }
