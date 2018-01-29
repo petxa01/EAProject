@@ -27,8 +27,73 @@ public class Franchise {
         this.studioId = studioId;
     }
 
+    public static void deleteGameF() throws IOException {
+        boolean repeat = false;
+        Game g = null;
+        int gameId = 0;
+        do {
+            String name = Read.String("Type the name of the game:");
+            ArrayList<Object> games = select("games", "Name LIKE '%" + name + "%'");
+            if (games.size() > 1) {
+                System.out.println(games.size() + " games found:");
+                printGame(games);
+                System.out.println("please specify more");
+                repeat = true;
+            } else if (games.size() < 1) {
+                System.out.println("No games found try again");
+                repeat = true;
+            } else {
+                repeat = false;
+                g = (Game) games.get(0);
+                gameId = g.getId();
+                update("Games","FranchiseId","null","Id = "+gameId);
+                System.out.println(g.getName() + " is not in a franchise anymore");
+                Read.Pause();
+            }
+
+        } while (repeat);
+    }
+    public static void updateFranchise() {
+        boolean repeat = false;
+        int studioId = 0;
+        String value = "";
+        do {
+            do {
+                String name = Read.String("Type the name of the studio:");
+                ArrayList<Object> studios = select("studios", "IdCard LIKE '%" + name + "%'");
+                if (studios.size() > 1) {
+                    System.out.println(studios.size() + " clients found:");
+                    printGame(studios);
+                    System.out.println("please specify more");
+                    repeat = true;
+                } else if (studios.size() < 1) {
+                    System.out.println("No clients found try again");
+                    repeat = true;
+                } else {
+                    repeat = false;
+                    Studio c = (Studio) studios.get(0);
+                    studioId = c.getId();
+
+                }
+            } while (repeat);
+            System.out.println("Enter what field you wish to change");
+            System.out.println("+            [1] name             +");
+            int option = Read.Int("+           [2] Country           +");
+            switch (option) {
+                case 1:
+                    value = Read.String("Enter the new name");
+                    break;
+                case 2:
+                    value = Read.String("Enter the new country");
+                    break;
+                default:
+                    System.out.println("You have to enter a valid number");
+                    repeat = true;
+            }
+        } while (repeat);
+        update("Studios", "Name", value, "id=" + studioId);
+    }
     public static void addGame() throws IOException {
-        //TODO:Esto está sin terminar
         boolean repeat = false;
         Game g = null;
         Franchise f;
