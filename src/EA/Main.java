@@ -123,7 +123,15 @@ public class Main {
                         case 4:
                             addGame();
                             break;
+<<<<<<< HEAD
                             case
+=======
+                        case 5:
+                            deleteGameF();
+                            break;
+                        case 6:
+                            updateFranchise;
+>>>>>>> parent of 9e95bfe... A
 
                     }
                     break;
