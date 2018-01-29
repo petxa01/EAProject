@@ -21,7 +21,7 @@ public class Client {
 
     }
 
-    public Client(int id, String idCard, String name, String category) {
+    public Client(int id, String name,String category, String idCard) {
         this.id = id;
         this.idCard = idCard;
         this.name = name;
