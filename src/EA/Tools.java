@@ -20,7 +20,7 @@ public class Tools {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setPort(3306);
         dataSource.setUser("root");
-        dataSource.setPassword("admindam2");
+        dataSource.setPassword("root");
         dataSource.setDatabaseName("ea");
         dataSource.setServerName("127.0.0.1");
         Connection conn;

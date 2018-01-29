@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import static EA.DBtools.delete;
 import static EA.DBtools.select;
-import static EA.Franchise.insertFranchise;
-import static EA.Franchise.printFranchise;
+import static EA.Franchise.*;
+import static EA.Game.deleteGame;
 import static EA.Game.printGame;
 import static EA.Studio.insertStudios;
 import static EA.Studio.printStudio;
@@ -79,7 +79,7 @@ public class Main {
                                 Read.Pause();
                                 break;
                             case 3:
-                                //TODO: Añadir delete
+                                deleteGame();
                             case 4:
                                 //TODO: Añadir update
                             case 0:
@@ -115,9 +115,15 @@ public class Main {
                             Read.Pause();
                             break;
                         case 2:
-                            //TODO: Completar cuando esté el método insertFranchise terminado
+                            insertFranchise();
                             break;
                         case 3:
+                            deleteFranchise();
+                            break;
+                        case 4:
+                            addGame();
+                            break;
+                            case
 
                     }
                     break;
@@ -147,8 +153,8 @@ public class Main {
                             Read.Pause();
                             break;
                         case 2:
-                                insertStudios("Studio");
-                                break;
+                            insertStudios("Studio");
+                            break;
                         case 3:
 
                     }
