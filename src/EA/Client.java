@@ -56,12 +56,12 @@ public class Client {
         }
         return returnObjectList(objectList, exist);
     }
-    public static void insertClients(String table){
-        String idCard=Read.String("Enter the id card");
-        String name=Read.String("Enter the Client name");
-        String category=Read.String("Enter the client category");
+    public static void insertClients(){
+        String idCard=Read.String("Enter the id card: ");
+        String name=Read.String("Enter the Client name: ");
+        String category=Read.String("Enter the client category: ");
 
-        sqlStmt("Insert into "+ table +" (Name, Category,IdCard) VALUES ("+name+","+category+","+idCard+")", false);
+        sqlStmt("Insert into clients (Name, Category,IdCard) VALUES ("+name+","+category+","+idCard+")", false);
     }
 
     public static void deleteClients(){

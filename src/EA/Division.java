@@ -56,10 +56,10 @@ public class Division {
         }
         return returnObjectList(objectList, exist);
     }
-    public static void insertDivisions(String table){
+    public static void insertDivisions(){
         String name=Read.String("Enter the name");
 
-        sqlStmt("Insert into "+ table +" (Name) VALUES ("+name+")", false);
+        sqlStmt("Insert into divisions (Name) VALUES ("+name+")", false);
     }
     public static void printDivision(ArrayList<Object> divisions) {
         for (Object g : divisions) {

@@ -34,7 +34,7 @@ public class Developer {
         this.country = country;
     }
 
-    public static void insertDevelopers(String table) {
+    public static void insertDevelopers() {
         String idCard = Read.String("Enter the ID Card");
         String name = Read.String("Enter the name");
         String surname = Read.String("Enter the surname");
@@ -43,7 +43,7 @@ public class Developer {
         String country = Read.String("Enter the country");
 
 
-        sqlStmt("Insert into " + table + " (IdCard, Name,Surname,Salary,Job,Country) VALUES (" + idCard + "," + name + "," + surname + "," + salary + "," + job + "," + country + ")", false);
+        sqlStmt("Insert into developers (IdCard, Name,Surname,Salary,Job,Country) VALUES (" + idCard + "," + name + "," + surname + "," + salary + "," + job + "," + country + ")", false);
     }
 
     public int getId() {

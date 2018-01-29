@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="EAHibernate.Developers" table="developers" schema="ea">
+        <id name="id">
+            <column name="Id" sql-type="int(11)"/>
+        </id>
+        <property name="idCard">
+            <column name="IdCard" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="name">
+            <column name="Name" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="surname">
+            <column name="Surname" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="salary">
+            <column name="Salary" sql-type="float" precision="-1"/>
+        </property>
+        <property name="job">
+            <column name="Job" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="country">
+            <column name="Country" sql-type="varchar(45)" length="45"/>
+        </property>
+        <set name="developsById" inverse="true">
+            <key>
+                <column name="DeveloperId"/>
+            </key>
+            <one-to-many not-found="ignore" class="EAHibernate.Develops"/>
+        </set>
+    </class>
+</hibernate-mapping>

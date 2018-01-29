@@ -1,5 +1,6 @@
 package EA;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -33,7 +34,7 @@ public class Sale {
     public static ArrayList<Object> selectSales(ResultSet res, boolean exist) {
         ArrayList<Object> objectList = new ArrayList();
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("y M d", Locale.ENGLISH);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("y-M-d", Locale.ENGLISH);
             while (res.next()) {
                 exist = true;
                 Sale sale = new Sale(
@@ -140,6 +141,24 @@ public class Sale {
         sqlStmt("Delete from sales where gameid = "+gameId+"and client id = "+clientId,false);
     }
 
+    public static void printSales() throws IOException {
+
+        ArrayList<Object> sales = select("sales");
+        System.out.println("SALE LIST:");
+        System.out.println("``````````````````````````");
+        for (Object s : sales) {
+            Sale sale = (Sale) s;
+            System.out.println("Quantity: " + sale.getQuantity());
+            System.out.println("Date: " + sale.getDate().toString());
+            Game g = (Game) select("Games", "Id = " + sale.getGameId()).get(0);
+            System.out.println("Game: " + g.getName());
+            Client c = (Client) select("Clients", "Id = " + sale.getClientId()).get(0);
+            System.out.println("Client name: "+c.getName());
+            System.out.println("``````````````````````````");
+
+        }
+        Read.Pause();
+    }
 
 
     public int getId() {

@@ -51,6 +51,7 @@ public class Develop {
         }
         return returnObjectList(objectList, exist);
     }
+
     public static void insertDevelops(String table){
         boolean repeat;
         int gameId;
