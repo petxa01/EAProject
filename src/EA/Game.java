@@ -55,55 +55,6 @@ public class Game {
         return returnObjectList(objectList, exist);
     }
 
-    public static void updateGame() {
-        boolean repeat = false;
-        int gameId = 0;
-        Game g = null;
-        String value = "";
-        do {
-            do {
-                String name = Read.String("Type the name of the game:");
-                ArrayList<Object> games = select("games", "Name LIKE '%" + name + "%'");
-                if (games.size() > 1) {
-                    System.out.println(games.size() + " games found:");
-                    printGame(games);
-                    System.out.println("please specify more");
-                    repeat = true;
-                } else if (games.size() < 1) {
-                    System.out.println("No games found try again");
-                    repeat = true;
-                } else {
-                    repeat = false;
-                    g = (Game) games.get(0);
-                    gameId = g.getId();
-
-                }
-            } while (repeat);
-            System.out.println("Enter what field you wish to change");
-            System.out.println("+            [1] Name             +");
-            System.out.println("+            [2] Genre             +");
-            int option = Read.Int("+           [3] Price           +");
-            switch (option) {
-                case 1:
-                    value = Read.String("Enter the new name");
-                    update("Studios", "Name", value, "id=" + g.getId());
-                    break;
-                case 2:
-                    value = Read.String("Enter the new genre");
-                    update("Studios", "genre", value, "id=" + g.getId());
-                    break;
-                case 3:
-                    value = Read.String("Enter the new price");
-                    update("Studios", "price", value, "id=" + g.getId());
-                    break;
-                default:
-                    System.out.println("You have to enter a valid number");
-                    repeat = true;
-            }
-        } while (repeat);
-
-    }
-
     public static void insertGames() {
         String name = Read.String("Enter the name");
         String genre = Read.String("Enter the genre");
@@ -131,6 +82,29 @@ public class Game {
         sqlStmt("Insert into games (Name,Genre,Price,FranchiseId) VALUES (" + name + "," + genre + "," + price + "," + franchiseId + ")", false);
     }
 
+    public static void deleteGames(){
+        boolean repeat;
+        int gameId;
+        do {
+            gameId = Read.Int("Type the name of the game you want to delete:");
+            ArrayList<Object> games = select("Games", "Name LIKE '%" + gameId + "%'");
+            if (games.size() > 1) {
+                System.out.println(games.size() + " games found:");
+                printGame(games);
+                System.out.println("please specify more");
+                repeat=true;
+            } else if(games.size()<1) {
+                System.out.println("No games found try again");
+                repeat=true;
+            }else {
+                repeat = false;
+                Game g = (Game) games.get(0);
+                gameId=g.getId();
+            }
+        }while(repeat);
+
+        sqlStmt("Delete from games where id="+gameId,false);
+    }
 
     public static void deleteGame() throws IOException {
 

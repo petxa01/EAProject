@@ -167,7 +167,7 @@ public class Developer {
     public static void updateDeveloper(){
         boolean repeat;
         int devId, menu;
-        String
+        String 
         do {
             devId = Read.Int("Type the id card of the developer you want to update:");
             ArrayList<Object> developers = select("Developers", "IdCard LIKE '%" + devId + "%'");

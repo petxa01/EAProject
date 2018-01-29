@@ -8,7 +8,6 @@ import static EA.DBtools.select;
 import static EA.Franchise.*;
 import static EA.Game.deleteGame;
 import static EA.Game.printGame;
-import static EA.Game.updateGame;
 import static EA.Studio.insertStudios;
 import static EA.Studio.printStudio;
 import static EA.Tools.cls;
@@ -82,7 +81,7 @@ public class Main {
                             case 3:
                                 deleteGame();
                             case 4:
-                                updateGame();
+                                //TODO: Añadir update
                             case 0:
                                 repeatSub = false;
                                 break;
@@ -92,52 +91,42 @@ public class Main {
                     break;
                 case 2:
                     //Franchises
-                    do {
-                        repeatSub = true;
-                        cls();
-                        ArrayList<Object> franchises = null;
-                        System.out.println("++++++++++++FRANCHISES+++++++++++++");
-                        System.out.println("+        [1] Franchise List       +");
-                        System.out.println("+---------------------------------+");
-                        System.out.println("+        [2] Add Franchise        +");
-                        System.out.println("+      [3] Delete Franchise       +");
-                        System.out.println("+---------------------------------+");
-                        System.out.println("+    [4] Add Game to Franchise    +");
-                        System.out.println("+  [5] Delete Game from Franchise +");
-                        System.out.println("+---------------------------------+");
-                        System.out.println("+       [6] Edit Franchise        +");
-                        System.out.println("+---------------------------------+");
-                        System.out.println("+            [0] Back             +");
-                        chooser = Read.Int("+++++++++++++++++++++++++++++++++++");
-                        switch (chooser) {
-                            case 1:
-                                franchises = select("Franchises");
-                                System.out.println("FRANCHISE LIST:");
-                                System.out.println("``````````````````````````");
-                                printFranchise(franchises);
-                                Read.Pause();
-                                break;
-                            case 2:
-                                insertFranchise();
-                                break;
-                            case 3:
-                                deleteFranchise();
-                                break;
-                            case 4:
-                                addGame();
-                                break;
-                            case 5:
-                                deleteGameF();
-                                break;
-                            case 6:
-                                updateFranchise();
-                                break;
-                            case 0:
-                                repeatSub = false;
-                                break;
-                        }
-                        break;
-                    } while (repeatSub);
+                    cls();
+                    ArrayList<Object> franchises = null;
+                    System.out.println("++++++++++++FRANCHISES+++++++++++++");
+                    System.out.println("+        [1] Franchise List       +");
+                    System.out.println("+---------------------------------+");
+                    System.out.println("+        [2] Add Franchise        +");
+                    System.out.println("+      [3] Delete Franchise       +");
+                    System.out.println("+---------------------------------+");
+                    System.out.println("+    [4] Add Game to Franchise    +");
+                    System.out.println("+  [5] Delete Game from Franchise +");
+                    System.out.println("+---------------------------------+");
+                    System.out.println("+       [6] Edit Franchise        +");
+                    System.out.println("+---------------------------------+");
+                    System.out.println("+            [0] Back             +");
+                    chooser = Read.Int("+++++++++++++++++++++++++++++++++++");
+                    switch (chooser) {
+                        case 1:
+                            franchises = select("Franchises");
+                            System.out.println("FRANCHISE LIST:");
+                            System.out.println("``````````````````````````");
+                            printFranchise(franchises);
+                            Read.Pause();
+                            break;
+                        case 2:
+                            insertFranchise();
+                            break;
+                        case 3:
+                            deleteFranchise();
+                            break;
+                        case 4:
+                            addGame();
+                            break;
+                            case
+
+                    }
+                    break;
                 case 3:
                     //Studios
                     cls();
