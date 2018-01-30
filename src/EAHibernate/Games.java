@@ -173,5 +173,15 @@ public class Games {
         s.close();
         sf.close();
     }
+    public static void deleteGames(int id){
+        SessionFactory sf = getSessionFactory();
+        Session s = sf.openSession();
+        Transaction t = s.beginTransaction();
+
+        Games g = new Games(id);
+        s.delete(g);
+        t.commit();
+        s.close();
+    }
 
 }
