@@ -6,8 +6,13 @@ import org.hibernate.Transaction;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Iterator;
+
+import java.util.List;
 import java.util.Objects;
 
+
+import org.hibernate.query.Query;
 import static EAHibernate.HibernateTools.getSessionFactory;
 
 @Entity
@@ -119,7 +124,7 @@ public class Games {
     }
 
     //Methods
-    public static void insertGame(String name, String genre, Float price){
+    public static void insertGame(String name, String genre, Float price, int fid){
         SessionFactory sf = getSessionFactory();
         Session s = sf.openSession();
         Transaction t = s.beginTransaction();
@@ -127,9 +132,23 @@ public class Games {
         g.setName(name);
         g.setGenre(genre);
         g.setPrice(price);
-        Query q = s.createQuery("from Franchises ");
-
-
+        g.setFranchiseId(fid);
+        s.save(g);
+        t.commit();
 
     }
+    public static void printGames(){
+        SessionFactory sf = getSessionFactory();
+        Session s = sf.openSession();
+        Query q = s.createQuery("from Games ");
+        List results = q.list();
+        Iterator iterator = results.iterator();
+        System.out.println("NAME\t|\t GENRE\t|\t PRICE\t|\t FRANCHISE\t\t |");
+        while (iterator.hasNext()){
+            Games game = (Games) iterator.next();
+            System.out.println(game.getName() + "\t\t"+game.getGenre()+"\t\t"+game.franchisesByFranchiseId.getName());
+
+        }
+    }
+    
 }
