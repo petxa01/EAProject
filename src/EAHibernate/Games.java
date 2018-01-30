@@ -1,8 +1,14 @@
 package EAHibernate;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
+
+import static EAHibernate.HibernateTools.getSessionFactory;
 
 @Entity
 public class Games {
@@ -108,6 +114,22 @@ public class Games {
     }
 
     public void setSalesById(Collection<Sales> salesById) {
+
         this.salesById = salesById;
+    }
+
+    //Methods
+    public static void insertGame(String name, String genre, Float price){
+        SessionFactory sf = getSessionFactory();
+        Session s = sf.openSession();
+        Transaction t = s.beginTransaction();
+        Games g = new Games();
+        g.setName(name);
+        g.setGenre(genre);
+        g.setPrice(price);
+        Query q = s.createQuery("from Franchises ");
+
+
+
     }
 }

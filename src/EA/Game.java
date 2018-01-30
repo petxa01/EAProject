@@ -56,14 +56,15 @@ public class Game {
     }
 
     public static void insertGames() {
-        String name = Read.String("Enter the name");
-        String genre = Read.String("Enter the genre");
-        float price = Read.Float("Enter the price");
-        int franchiseId;
+        String name = Read.String("Enter the name: ");
+        String genre = Read.String("Enter the genre: ");
+        float price = Read.Float("Enter the price: ");
+        int franchiseId = 0;
+        String fname;
         boolean repeat;
         do {
-            franchiseId = Read.Int("Type the franchise of the game:");
-            ArrayList<Object> franchise = select("Franchises", "Name LIKE '%" + franchiseId + "%'");
+            fname = Read.String("Type the franchise of the game:");
+            ArrayList<Object> franchise = select("Franchises", "Name LIKE '%" + fname + "%'");
             if (franchise.size() > 1) {
                 System.out.println(franchise.size() + " franchises found:");
                 printFranchise(franchise);
@@ -84,10 +85,11 @@ public class Game {
 
     public static void deleteGames(){
         boolean repeat;
-        int gameId;
+        int gameId=0;
+        String name;
         do {
-            gameId = Read.Int("Type the name of the game you want to delete:");
-            ArrayList<Object> games = select("Games", "Name LIKE '%" + gameId + "%'");
+            name = Read.String("Type the name of the game you want to delete:");
+            ArrayList<Object> games = select("Games", "Name LIKE '%" + name + "%'");
             if (games.size() > 1) {
                 System.out.println(games.size() + " games found:");
                 printGame(games);
