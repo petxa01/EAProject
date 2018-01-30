@@ -5,8 +5,8 @@
 <hibernate-mapping>
 
     <class name="EAHibernate.Clients" table="clients" schema="ea">
-        <id name="id">
-            <column name="Id" sql-type="int(11)"/>
+        <id name="id" >
+            <column name="Id" sql-type="int(11)" />
         </id>
         <property name="name">
             <column name="Name" sql-type="varchar(45)" length="45"/>

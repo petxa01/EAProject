@@ -137,8 +137,8 @@ public class Franchises {
         Session sesion = sf.openSession();
         Transaction tx = sesion.beginTransaction();
 
-        Pueblos objeto_pueblos = new Pueblos(idPueblos);
-        sesion.delete(objeto_pueblos);//delete egiten du
+        //Pueblos objeto_pueblos = new Pueblos(idPueblos);
+        //sesion.delete(objeto_pueblos);//delete egiten du
         System.out.println("Erregistroa ezabatua izan da");
 
         tx.commit();

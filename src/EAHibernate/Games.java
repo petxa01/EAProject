@@ -26,6 +26,14 @@ public class Games {
     private Franchises franchisesByFranchiseId;
     private Collection<Sales> salesById;
 
+    public Games(int id) {
+        this.id = id;
+
+    }
+
+    public Games() {
+    }
+
     @Id
     @Column(name = "Id", nullable = false)
     public int getId() {
@@ -150,5 +158,20 @@ public class Games {
 
         }
     }
-    
+    public static void updateGames(int id, String newName, String newGenre, float newPrice, int newFranchise){
+        SessionFactory sf = getSessionFactory();
+        Session s = sf.openSession();
+        Transaction t = s.beginTransaction();
+
+        Games game = new Games(id);
+        game.setName(newName);
+        game.setGenre(newGenre);
+        game.setPrice(newPrice);
+        game.setFranchiseId(newFranchise);
+        s.update(game);
+        t.commit();
+        s.close();
+        sf.close();
+    }
+
 }

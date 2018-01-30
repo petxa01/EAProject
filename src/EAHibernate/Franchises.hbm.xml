@@ -11,7 +11,7 @@
         <property name="name">
             <column name="Name" sql-type="varchar(45)" length="45"/>
         </property>
-        <property name="studioId">
+        <property name="studioId" insert="false" update="false">
             <column name="StudioId" sql-type="int(11)" not-null="true"/>
         </property>
         <many-to-one name="studiosByStudioId" class="EAHibernate.Studios">

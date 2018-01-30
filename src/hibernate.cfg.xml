@@ -6,6 +6,8 @@
     <session-factory>
         <property name="connection.url">jdbc:mysql://localhost:3306/ea</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">root</property>
         <mapping resource="EAHibernate/Clients.hbm.xml"/>
         <mapping class="EAHibernate.Clients"/>
         <mapping class="EAHibernate.Developers"/>
@@ -22,8 +24,7 @@
         <mapping resource="EAHibernate/Sales.hbm.xml"/>
         <mapping class="EAHibernate.Studios"/>
         <mapping resource="EAHibernate/Studios.hbm.xml"/>
-        <!-- <property name="connection.username"/> -->
-        <!-- <property name="connection.password"/> -->
+
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->

@@ -7,7 +7,7 @@ public class HibernateTools {
 
     private static final SessionFactory sessionFactory = buildSessionFactory();
 
-    private static SessionFactory buildSessionFactory() {
+    static SessionFactory buildSessionFactory() {
         try {
             // Create the SessionFactory from hibernate.cfg.xml
             return new Configuration().configure().buildSessionFactory();
@@ -23,7 +23,7 @@ public class HibernateTools {
         return sessionFactory;
     }
 
-    //Métodos para las clases
+
 
 
 
