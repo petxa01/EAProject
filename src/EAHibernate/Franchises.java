@@ -18,6 +18,14 @@ public class Franchises {
     private Studios studiosByStudioId;
     private Collection<Games> gamesById;
 
+    public Franchises(){
+
+    }
+
+    public Franchises(int id){
+        this.id=id;
+    }
+
     @Id
     @Column(name = "Id", nullable = false)
     public int getId() {
@@ -137,7 +145,7 @@ public class Franchises {
         Session sesion = sf.openSession();
         Transaction tx = sesion.beginTransaction();
 
-        Pueblos objeto_pueblos = new Pueblos(idPueblos);
+        Franchises objeto_pueblos = new Franchises(idPueblos);
         sesion.delete(objeto_pueblos);//delete egiten du
         System.out.println("Erregistroa ezabatua izan da");
 

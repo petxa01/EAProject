@@ -10,6 +10,14 @@ public class Divisions {
     private String name;
     private Collection<Studios> studiosById;
 
+    public Divisions(){
+
+    }
+
+    public Divisions(int id){
+        this.id=id;
+    }
+
     @Id
     @Column(name = "Id", nullable = false)
     public int getId() {
