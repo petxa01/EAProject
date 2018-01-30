@@ -13,6 +13,14 @@ public class Studios {
     private Collection<Franchises> franchisesById;
     private Divisions divisionsByDivisionId;
 
+    public Studios(){
+
+    }
+
+    public Studios(int id){
+        this.id=id;
+    }
+
     @Id
     @Column(name = "Id", nullable = false)
     public int getId() {

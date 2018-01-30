@@ -15,6 +15,14 @@ public class Developers {
     private String country;
     private Collection<Develops> developsById;
 
+    public Developers(){
+
+    }
+
+    public Developers(int id){
+        this.id=id;
+    }
+
     @Id
     @Column(name = "Id", nullable = false)
     public int getId() {

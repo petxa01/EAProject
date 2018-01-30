@@ -14,6 +14,14 @@ public class Sales {
     private Games gamesByGameId;
     private Clients clientsByClientId;
 
+    public Sales(){
+
+    }
+
+    public Sales(int id){
+        this.id=id;
+    }
+
     @Id
     @Column(name = "Id", nullable = false)
     public int getId() {

@@ -12,6 +12,14 @@ public class Clients {
     private String idCard;
     private Collection<Sales> salesById;
 
+    public Clients(){
+
+    }
+
+    public Clients(int id){
+        this.id=id;
+    }
+
     @Id
     @Column(name = "Id", nullable = false)
     public int getId() {

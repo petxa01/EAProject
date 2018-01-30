@@ -12,6 +12,15 @@ public class Develops {
     private Developers developersByDeveloperId;
     private Games gamesByGameId;
 
+    public Develops(){
+
+    }
+
+    public Develops(int developerId,int gameId ){
+        this.developerId=developerId;
+        this.gameId=gameId;
+    }
+
     @Id
     @Column(name = "DeveloperId", nullable = false)
     public int getDeveloperId() {
