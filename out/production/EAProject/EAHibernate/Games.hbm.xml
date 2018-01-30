@@ -17,7 +17,7 @@
         <property name="price">
             <column name="Price" sql-type="float" precision="-1"/>
         </property>
-        <property name="franchiseId" insert="false" update="false">
+        <property name="franchiseId" >
             <column name="FranchiseId" sql-type="int(11)" not-null="true"/>
         </property>
         <many-to-one name="franchisesByFranchiseId" class="EAHibernate.Franchises">

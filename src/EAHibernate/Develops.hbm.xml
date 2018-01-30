@@ -16,10 +16,10 @@
         <property name="finished">
             <column name="Finished" sql-type="tinyint(4)"/>
         </property>
-        <many-to-one name="developersByDeveloperId" class="EAHibernate.Developers" insert="false" update="false">
+        <many-to-one name="developersByDeveloperId" class="EAHibernate.Developers" >
             <column name="DeveloperId"/>
         </many-to-one>
-        <many-to-one name="gamesByGameId" class="EAHibernate.Games" insert="false" update="false">
+        <many-to-one name="gamesByGameId" class="EAHibernate.Games" >
             <column name="GameId"/>
         </many-to-one>
     </class>

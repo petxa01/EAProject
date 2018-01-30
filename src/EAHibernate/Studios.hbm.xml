@@ -17,7 +17,7 @@
         <property name="divisionId">
             <column name="DivisionId" sql-type="int(11)" not-null="true"/>
         </property>
-        <many-to-one name="divisionsByDivisionId" class="EAHibernate.Divisions" insert="false" update="false">
+        <many-to-one name="divisionsByDivisionId" class="EAHibernate.Divisions" >
             <column name="DivisionId" not-null="true"/>
         </many-to-one>
         <set name="franchisesById" inverse="true">
