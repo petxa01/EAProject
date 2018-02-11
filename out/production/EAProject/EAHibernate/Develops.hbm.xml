@@ -1,26 +1,25 @@
-<?xml version='1.0' encoding='utf-8'?>
-<!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 07-feb-2018 10:21:05 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-
-    <class name="EAHibernate.Develops" table="develops" schema="ea">
-        <composite-id mapped="true" class="EAHibernate.DevelopsPK">
-            <key-property name="developerId">
-                <column name="DeveloperId" sql-type="int(11)"/>
+    <class name="EAHibernate.Develops" table="develops" catalog="ea" optimistic-lock="version">
+        <composite-id name="id" class="EAHibernate.DevelopsId">
+            <key-property name="developerId" type="int">
+                <column name="DeveloperId" />
             </key-property>
-            <key-property name="gameId">
-                <column name="GameId" sql-type="int(11)"/>
+            <key-property name="gameId" type="int">
+                <column name="GameId" />
             </key-property>
         </composite-id>
-        <property name="finished">
-            <column name="Finished" sql-type="tinyint(4)"/>
+        <many-to-one name="developers" class="EAHibernate.Developers" update="false" insert="false" fetch="select">
+            <column name="DeveloperId" not-null="true" />
+        </many-to-one>
+        <many-to-one name="games" class="EAHibernate.Games" update="false" insert="false" fetch="select">
+            <column name="GameId" not-null="true" />
+        </many-to-one>
+        <property name="finished" type="byte">
+            <column name="Finished" not-null="true" />
         </property>
-        <many-to-one name="developersByDeveloperId" class="EAHibernate.Developers" >
-            <column name="DeveloperId"/>
-        </many-to-one>
-        <many-to-one name="gamesByGameId" class="EAHibernate.Games" >
-            <column name="GameId"/>
-        </many-to-one>
     </class>
 </hibernate-mapping>

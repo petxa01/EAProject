@@ -1,36 +1,36 @@
-<?xml version='1.0' encoding='utf-8'?>
-<!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 07-feb-2018 10:21:05 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-
-    <class name="EAHibernate.Developers" table="developers" schema="ea">
-        <id name="id">
-            <column name="Id" sql-type="int(11)"/>
+    <class name="EAHibernate.Developers" table="developers" catalog="ea" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="Id" />
+            <generator class="identity" />
         </id>
-        <property name="idCard">
-            <column name="IdCard" sql-type="varchar(45)" length="45"/>
+        <property name="idCard" type="string">
+            <column name="IdCard" length="45" not-null="true" unique="true" />
         </property>
-        <property name="name">
-            <column name="Name" sql-type="varchar(45)" length="45"/>
+        <property name="name" type="string">
+            <column name="Name" length="45" not-null="true" />
         </property>
-        <property name="surname">
-            <column name="Surname" sql-type="varchar(45)" length="45"/>
+        <property name="surname" type="string">
+            <column name="Surname" length="45" not-null="true" />
         </property>
-        <property name="salary">
-            <column name="Salary" sql-type="float" precision="-1"/>
+        <property name="salary" type="float">
+            <column name="Salary" precision="12" scale="0" not-null="true" />
         </property>
-        <property name="job">
-            <column name="Job" sql-type="varchar(45)" length="45"/>
+        <property name="job" type="string">
+            <column name="Job" length="45" not-null="true" />
         </property>
-        <property name="country">
-            <column name="Country" sql-type="varchar(45)" length="45"/>
+        <property name="country" type="string">
+            <column name="Country" length="45" not-null="true" />
         </property>
-        <set name="developsById" inverse="true">
+        <set name="developses" table="develops" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="DeveloperId"/>
+                <column name="DeveloperId" not-null="true" />
             </key>
-            <one-to-many not-found="ignore" class="EAHibernate.Develops"/>
+            <one-to-many class="EAHibernate.Develops" />
         </set>
     </class>
 </hibernate-mapping>

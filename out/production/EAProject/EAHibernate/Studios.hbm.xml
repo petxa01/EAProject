@@ -1,30 +1,27 @@
-<?xml version='1.0' encoding='utf-8'?>
-<!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 07-feb-2018 10:21:05 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-
-    <class name="EAHibernate.Studios" table="studios" schema="ea">
-        <id name="id">
-            <column name="Id" sql-type="int(11)"/>
+    <class name="EAHibernate.Studios" table="studios" catalog="ea" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="Id" />
+            <generator class="identity" />
         </id>
-        <property name="name">
-            <column name="Name" sql-type="varchar(45)" length="45"/>
-        </property>
-        <property name="country">
-            <column name="Country" sql-type="varchar(45)" length="45"/>
-        </property>
-        <property name="divisionId">
-            <column name="DivisionId" sql-type="int(11)" not-null="true"/>
-        </property>
-        <many-to-one name="divisionsByDivisionId" class="EAHibernate.Divisions" >
-            <column name="DivisionId" not-null="true"/>
+        <many-to-one name="divisions" class="EAHibernate.Divisions" fetch="select">
+            <column name="DivisionId" />
         </many-to-one>
-        <set name="franchisesById" inverse="true">
+        <property name="name" type="string">
+            <column name="Name" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="country" type="string">
+            <column name="Country" length="45" not-null="true" />
+        </property>
+        <set name="franchiseses" table="franchises" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="StudioId" not-null="true"/>
+                <column name="StudioId" />
             </key>
-            <one-to-many not-found="ignore" class="EAHibernate.Franchises"/>
+            <one-to-many class="EAHibernate.Franchises" />
         </set>
     </class>
 </hibernate-mapping>

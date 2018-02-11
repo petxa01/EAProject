@@ -1,30 +1,24 @@
-<?xml version='1.0' encoding='utf-8'?>
-<!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 07-feb-2018 10:21:05 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-
-    <class name="EAHibernate.Sales" table="sales" schema="ea">
-        <id name="id">
-            <column name="Id" sql-type="int(11)"/>
+    <class name="EAHibernate.Sales" table="sales" catalog="ea" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="Id" />
+            <generator class="identity" />
         </id>
-        <property name="quantity">
-            <column name="Quantity" sql-type="int(11)"/>
-        </property>
-        <property name="date">
-            <column name="Date" sql-type="date" not-null="true"/>
-        </property>
-        <property name="gameId">
-            <column name="GameId" sql-type="int(11)" not-null="true"/>
-        </property>
-        <property name="clientId">
-            <column name="ClientId" sql-type="int(11)" not-null="true"/>
-        </property>
-        <many-to-one name="gamesByGameId" class="EAHibernate.Games" >
-            <column name="GameId" not-null="true"/>
+        <many-to-one name="clients" class="EAHibernate.Clients" fetch="select">
+            <column name="ClientId" />
         </many-to-one>
-        <many-to-one name="clientsByClientId" class="EAHibernate.Clients" >
-            <column name="ClientId" not-null="true"/>
+        <many-to-one name="games" class="EAHibernate.Games" fetch="select">
+            <column name="GameId" />
         </many-to-one>
+        <property name="quantity" type="int">
+            <column name="Quantity" not-null="true" />
+        </property>
+        <property name="date" type="date">
+            <column name="Date" length="10" />
+        </property>
     </class>
 </hibernate-mapping>

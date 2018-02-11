@@ -1,39 +1,36 @@
-<?xml version='1.0' encoding='utf-8'?>
-<!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 07-feb-2018 10:21:05 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-
-    <class name="EAHibernate.Games" table="games" schema="ea">
-        <id name="id" >
-            <column name="Id" sql-type="int(11)"/>
+    <class name="EAHibernate.Games" table="games" catalog="ea" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="Id" />
+            <generator class="identity" />
         </id>
-        <property name="name">
-            <column name="Name" sql-type="varchar(45)" length="45"/>
-        </property>
-        <property name="genre">
-            <column name="Genre" sql-type="varchar(45)" length="45"/>
-        </property>
-        <property name="price">
-            <column name="Price" sql-type="float" precision="-1"/>
-        </property>
-        <property name="franchiseId" >
-            <column name="FranchiseId" sql-type="int(11)" not-null="true"/>
-        </property>
-        <many-to-one name="franchisesByFranchiseId" class="EAHibernate.Franchises">
-            <column name="FranchiseId" not-null="true"/>
+        <many-to-one name="franchises" class="EAHibernate.Franchises" fetch="select">
+            <column name="FranchiseId" />
         </many-to-one>
-        <set name="developsById" inverse="true">
-            <key>
-                <column name="GameId"/>
-            </key>
-            <one-to-many not-found="ignore" class="EAHibernate.Develops"/>
-        </set>
-        <set name="salesById" inverse="true">
+        <property name="name" type="string">
+            <column name="Name" length="45" not-null="true" />
+        </property>
+        <property name="genre" type="string">
+            <column name="Genre" length="45" not-null="true" />
+        </property>
+        <property name="price" type="float">
+            <column name="Price" precision="12" scale="0" not-null="true" />
+        </property>
+        <set name="developses" table="develops" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="GameId" not-null="true" />
             </key>
-            <one-to-many not-found="ignore" class="EAHibernate.Sales"/>
+            <one-to-many class="EAHibernate.Develops" />
+        </set>
+        <set name="saleses" table="sales" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="GameId" />
+            </key>
+            <one-to-many class="EAHibernate.Sales" />
         </set>
     </class>
 </hibernate-mapping>

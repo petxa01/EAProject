@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <!--
 DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
 
@@ -39,19 +39,14 @@ made subject to such option by the copyright holder.
 
 Contributor(s):
 -->
-<hibernate-configuration>
-  <session-factory>
-    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ea?zeroDateTimeBehavior=convertToNull</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">root</property>
-    <mapping resource="EAHibernate/Divisions.hbm.xml"/>
-    <mapping resource="EAHibernate/Games.hbm.xml"/>
-    <mapping resource="EAHibernate/Studios.hbm.xml"/>
-    <mapping resource="EAHibernate/Franchises.hbm.xml"/>
-    <mapping resource="EAHibernate/Develops.hbm.xml"/>
-    <mapping resource="EAHibernate/Developers.hbm.xml"/>
-    <mapping resource="EAHibernate/Clients.hbm.xml"/>
-    <mapping resource="EAHibernate/Sales.hbm.xml"/>
-  </session-factory>
-</hibernate-configuration>
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="ea"/>
+  <table-filter match-name="develops"/>
+  <table-filter match-name="divisions"/>
+  <table-filter match-name="sales"/>
+  <table-filter match-name="clients"/>
+  <table-filter match-name="studios"/>
+  <table-filter match-name="franchises"/>
+  <table-filter match-name="developers"/>
+  <table-filter match-name="games"/>
+</hibernate-reverse-engineering>

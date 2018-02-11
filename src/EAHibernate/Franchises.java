@@ -18,6 +18,9 @@ public class Franchises  implements java.io.Serializable {
 
     public Franchises() {
     }
+    public Franchises(int id){
+        this.id = id;
+    }
 
 	
     public Franchises(String name) {
