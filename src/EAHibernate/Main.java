@@ -5,10 +5,11 @@ import EA.Read;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
-import static EA.Game.printGame;
 import static EA.Tools.cls;
 import static EAHibernate.Games.*;
+import static EAHibernate.Studios.deleteStudios;
+import static EAHibernate.Studios.insertStudio;
+import static EAHibernate.Studios.updateStudios;
 
 public class Main {
     public static void main(final String[] args) throws IOException {
@@ -27,13 +28,7 @@ public class Main {
             System.out.println("+    [2] Franchises       +");
             System.out.println("+      [3] Studios        +");
             System.out.println("+-------------------------+");
-            System.out.println("+     [4] Developers      +");
-            System.out.println("+-------------------------+");
-            System.out.println("+      [5] Clients        +");
-            System.out.println("+-------------------------+");
-            System.out.println("+     [6] Divisions       +");
-            System.out.println("+-------------------------+");
-            System.out.println("+      [7] Sales          +");
+            System.out.println("+      [4] Sales          +");
             System.out.println("+-------------------------+");
             System.out.println("+       [0] Exit          +");
             chooser = Read.Int("+++++++++++++++++++++++++++");
@@ -53,32 +48,26 @@ public class Main {
                         System.out.println("+        [0] Back         +");
                         chooser = Read.Int("+-------------------------+");
                         switch (chooser) {
-
                             case 1:
-
                                 printGames();
                                 Read.Pause();
                                 break;
                             case 2:
-
                                 insertGame();
                                 Read.Pause();
                                 break;
-                        }
-                    } while (repeatAll);
-            }}while (repeatAll);}}
-                                /*
                             case 3:
-                                deleteGame();
+                                deleteGames();
+                                Read.Pause();
+                                break;
                             case 4:
-                                //TODO: Añadir update
+                                updateGames();
+                                Read.Pause();
+                                break;
                             case 0:
                                 repeatSub = false;
-                                break;
                         }
-                        break;
                     } while (repeatSub);
-                    break;
                 case 2:
                     //Franchises
                     do {
@@ -127,6 +116,7 @@ public class Main {
                         }
                         break;
                     } while (repeatSub);
+
                 case 3:
                     //Studios
                     do {
@@ -139,157 +129,79 @@ public class Main {
                         System.out.println("+         [2] Add Studio           +");
                         System.out.println("+       [3] Delete Studio          +");
                         System.out.println("+----------------------------------+");
-                        System.out.println("+   [4] Add Franchise to Studio    +");
-                        System.out.println("+ [5] Delete Franchise from Studio +");
-                        System.out.println("+----------------------------------+");
-                        System.out.println("+        [6] Edit Studio           +");
+                        System.out.println("+        [4] Edit Studio           +");
                         System.out.println("+----------------------------------+");
                         System.out.println("+            [0] Back              +");
                         chooser = Read.Int("++++++++++++++++++++++++++++++++++++");
                         switch (chooser) {
                             case 1:
-                                studios = select("Studios");
-                                System.out.println("Studio list:");
-                                System.out.println("``````````````````````````");
-                                printStudio(studios);
+                                insertStudio();
                                 Read.Pause();
                                 break;
                             case 2:
-                                insertStudios("Studio");
+                                insertStudio();
+                                Read.Pause();
                                 break;
                             case 3:
+                                deleteStudios();
+                                Read.Pause();
+                                break;
+                            case 4:
+                                updateStudios();
+                                Read.Pause();
+                                break;
                             case 0:
                                 repeatSub = false;
                                 break;
                         }
-                        break;
                     } while (repeatSub);
                     break;
+
 
                 case 4:
-                    //Developers
+                    //Studios
                     do {
                         repeatSub = true;
                         cls();
-                        ArrayList<Object> developers = null;
-                        System.out.println("++++++++++++++DEVELOPERS+++++++++++++++");
-                        System.out.println("+           [1] Dev List              +");
-                        System.out.println("+         [2] Add Developer           +");
-                        System.out.println("+       [3] Delete Developer          +");
-                        System.out.println("+        [4] Edit Developer           +");
-                        System.out.println("+-------------------------------------+");
-                        System.out.println("+        [5] Add Game to Dev          +");
-                        System.out.println("+     [6] Remove Game from Dev        +");
-                        System.out.println("+-------------------------------------+");
-                        System.out.println("+   [7] List of Developing Games      +");
-                        System.out.println("+-------------------------------------+");
-                        System.out.println("+            [0] Back                 +");
-                        chooser = Read.Int("+++++++++++++++++++++++++++++++++++++++");
-                        switch (chooser) {
-
-                            case 1:
-                                developers = select("Developers");
-                                System.out.println("DEVELOPER LIST:");
-                                System.out.println("``````````````````````````");
-                                printDeveloper(developers);
-                                Read.Pause();
-                                break;
-                            case 2:
-                                insertDevelopers();
-                                break;
-                            case 3:
-                                deleteDeveloper();
-                                break;
-                            case 4:
-                                updateDeveloper();
-                                break;
-                            case 0:
-                                repeatSub = false;
-                                break;
-                            //TODO: El resto
-                        }
-                    } while (repeatSub);
-                    break;
-                case 5:
-                    //Clients
-                    do {
-                        repeatSub = true;
-                        cls();
-                        ArrayList<Object> clients = null;
-                        System.out.println("++++++++++++++CLIENTS+++++++++++++++");
-                        System.out.println("+       [1] Client list            +");
-                        System.out.println("+      [2] Add new client          +");
-                        System.out.println("+       [3] Delete client          +");
-                        System.out.println("+        [4] Edit client           +");
+                        ArrayList<Object> studios = null;
+                        System.out.println("+++++++++++++++SALES++++++++++++++++");
+                        System.out.println("+         [1] Sale List          +");
+                        System.out.println("+----------------------------------+");
+                        System.out.println("+         [2] Add Sale           +");
+                        System.out.println("+       [3] Delete Sale          +");
+                        System.out.println("+----------------------------------+");
+                        System.out.println("+        [4] Edit Sale           +");
                         System.out.println("+----------------------------------+");
                         System.out.println("+            [0] Back              +");
                         chooser = Read.Int("++++++++++++++++++++++++++++++++++++");
                         switch (chooser) {
                             case 1:
-                                clients = select("Clients");
-                                System.out.println("CLIENT LIST:");
-                                System.out.println("``````````````````````````");
-                                printClient(clients);
+                                insertStudio();
                                 Read.Pause();
                                 break;
                             case 2:
-                                insertClients();
+                                insertStudio();
+                                Read.Pause();
                                 break;
                             case 3:
-                                deleteClients();
+                                deleteStudios();
+                                Read.Pause();
                                 break;
                             case 4:
-                                updateClient();
+                                updateStudios();
+                                Read.Pause();
+                                break;
                             case 0:
                                 repeatSub = false;
                                 break;
                         }
-                        break;
                     } while (repeatSub);
                     break;
-                case 6:
-                    //Divisions
-                    do {
-                        repeatSub = true;
-                        cls();
-                        ArrayList<Object> divisions = null;
-                        System.out.println("++++++++++++++DIVISIONS+++++++++++++++");
-                        System.out.println("+        [1] Division list           +");
-                        System.out.println("+        [2] Add division            +");
-                        System.out.println("+       [3] Delete division          +");
-                        System.out.println("+        [4] Edit division           +");
-                        System.out.println("+------------------------------------+");
-                        System.out.println("+             [0] Back               +");
-                        chooser = Read.Int("++++++++++++++++++++++++++++++++++++++");
-                        switch (chooser) {
-                            case 1:
-                                divisions = select("divisions");
-                                System.out.println("DIVISION LIST:");
-                                System.out.println("``````````````````````````");
-                                printDivision(divisions);
-                                Read.Pause();
-                                break;
-                            case 2:
-                                insertDivisions();
-                                break;
-                            case 3:
-                                deleteDivision();
-                                break;
-                            case 4:
-                                break;//TODO:Update
-                            case 0:
-                                repeatAll = false;
-                                break;
-                        }
-                    } while (repeatSub);
-                case 7:
-                    printSales();
-                default://Switch general
-                    break;
+
             }
         } while (repeatAll);
 
     }
-    }
+}
 
 */

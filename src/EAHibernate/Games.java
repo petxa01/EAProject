@@ -118,7 +118,7 @@ public class Games implements java.io.Serializable {
         Session s = sf.openSession();
         Transaction t = s.beginTransaction();
         Games g = new Games();
-        g.setId(Read.Int("Game ID: "));
+        g.setId(1);
         g.setName(Read.String("Name: "));
         g.setGenre(Read.String("Genre: "));
         g.setPrice(Read.Float("Price: "));
@@ -144,33 +144,32 @@ public class Games implements java.io.Serializable {
         }
     }
 
-    public static void updateGames(int id, String newName, String newGenre, float newPrice, int newFranchise) {
+    public static void updateGames() {
         SessionFactory sf = getSessionFactory();
         Session s = sf.openSession();
         Transaction t = s.beginTransaction();
 
 
-        Games game = new Games();
-
-        game.setId(id);
-        game.setName(newName);
-        game.setGenre(newGenre);
-        game.setPrice(newPrice);
-        game.setFranchises(new Franchises(newFranchise));
-        s.update(game);
+        Games g = new Games();
+        g.setId(Read.Int("Game ID:"));
+        g.setName(Read.String("Name: "));
+        g.setGenre(Read.String("Genre: "));
+        g.setPrice(Read.Float("Price: "));
+        g.setFranchises(new Franchises(Read.Int("Franchise ID: ")));
+        s.update(g);
         t.commit();
         s.close();
         sf.close();
     }
 
-    public static void deleteGames(int id) {
+    public static void deleteGames() {
         SessionFactory sf = getSessionFactory();
         Session s = sf.openSession();
         Transaction t = s.beginTransaction();
+        int id = Read.Int("Type the ID of the game to be deleted: ");
         Query q = s.createQuery("from Games where id =" +id);
         List results = q.list();
         Iterator iterator = results.iterator();
-
         Games g = (Games) iterator.next();
         s.delete(g);
         t.commit();
