@@ -2,6 +2,8 @@ package EAHibernate;
 // Generated 07-feb-2018 10:21:04 by Hibernate Tools 4.3.1
 
 
+import EA.Client;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,6 +20,9 @@ public class Clients  implements java.io.Serializable {
      private Set<Sales> saleses = new HashSet<Sales>(0);
 
     public Clients() {
+    }
+    public Clients(Integer id){
+        this.id=id;
     }
 
 	

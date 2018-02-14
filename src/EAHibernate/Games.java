@@ -52,6 +52,10 @@ public class Games implements java.io.Serializable {
         this.name = name;
     }
 
+    public Games(Integer id) {
+        this.id=id;
+    }
+
     public Integer getId() {
         return this.id;
     }
