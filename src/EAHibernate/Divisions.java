@@ -26,7 +26,11 @@ public class Divisions  implements java.io.Serializable {
        this.name = name;
        this.studioses = studioses;
     }
-   
+
+    public Divisions(int id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return this.id;
     }

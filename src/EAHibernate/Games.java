@@ -2,11 +2,13 @@ package EAHibernate;
 // Generated 07-feb-2018 10:21:04 by Hibernate Tools 4.3.1
 
 
+import EA.Read;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.io.BufferedReader;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -114,16 +116,17 @@ public class Games implements java.io.Serializable {
 
 
     //Methods
-    public static void insertGame(int id, String name, String genre, Float price, int fid) {
+    public static void insertGame() {
+
         SessionFactory sf = getSessionFactory();
         Session s = sf.openSession();
         Transaction t = s.beginTransaction();
         Games g = new Games();
-        g.setId(id);
-        g.setName(name);
-        g.setGenre(genre);
-        g.setPrice(price);
-        g.setFranchises(new Franchises(fid));
+        g.setId(1);
+        g.setName(Read.String("Name: "));
+        g.setGenre(Read.String("Genre: "));
+        g.setPrice(Read.Float("Price: "));
+        g.setFranchises(new Franchises(Read.Int("Franchise ID: ")));
         s.save(g);
         t.commit();
 
@@ -136,40 +139,41 @@ public class Games implements java.io.Serializable {
         List results = q.list();
         Iterator iterator = results.iterator();
         System.out.println("NAME\t|\t GENRE\t|\t PRICE\t|\t FRANCHISE\t\t |");
+        System.out.println("-------------------------------------------------");
         while (iterator.hasNext()) {
             Games game = (Games) iterator.next();
             System.out.println(game.getName() + "\t\t" + game.getGenre() + "\t\t" + game.getFranchises().getName());
+            System.out.println("----");
 
         }
     }
 
-    public static void updateGames(int id, String newName, String newGenre, float newPrice, int newFranchise) {
+    public static void updateGames() {
         SessionFactory sf = getSessionFactory();
         Session s = sf.openSession();
         Transaction t = s.beginTransaction();
 
 
-        Games game = new Games();
-
-        game.setId(id);
-        game.setName(newName);
-        game.setGenre(newGenre);
-        game.setPrice(newPrice);
-        game.setFranchises(new Franchises(newFranchise));
-        s.update(game);
+        Games g = new Games();
+        g.setId(Read.Int("Game ID:"));
+        g.setName(Read.String("Name: "));
+        g.setGenre(Read.String("Genre: "));
+        g.setPrice(Read.Float("Price: "));
+        g.setFranchises(new Franchises(Read.Int("Franchise ID: ")));
+        s.update(g);
         t.commit();
         s.close();
         sf.close();
     }
 
-    public static void deleteGames(int id) {
+    public static void deleteGames() {
         SessionFactory sf = getSessionFactory();
         Session s = sf.openSession();
         Transaction t = s.beginTransaction();
+        int id = Read.Int("Type the ID of the game to be deleted: ");
         Query q = s.createQuery("from Games where id =" +id);
         List results = q.list();
         Iterator iterator = results.iterator();
-
         Games g = (Games) iterator.next();
         s.delete(g);
         t.commit();
