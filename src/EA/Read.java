@@ -25,7 +25,7 @@ public class Read {
 
     public static int Int(String text) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println(text);
+        System.out.print(text);
         String s = null;
         int a = 0;
         boolean x;

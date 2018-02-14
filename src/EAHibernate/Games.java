@@ -2,11 +2,13 @@ package EAHibernate;
 // Generated 07-feb-2018 10:21:04 by Hibernate Tools 4.3.1
 
 
+import EA.Read;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.io.BufferedReader;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -110,16 +112,17 @@ public class Games implements java.io.Serializable {
 
 
     //Methods
-    public static void insertGame(int id, String name, String genre, Float price, int fid) {
+    public static void insertGame() {
+
         SessionFactory sf = getSessionFactory();
         Session s = sf.openSession();
         Transaction t = s.beginTransaction();
         Games g = new Games();
-        g.setId(id);
-        g.setName(name);
-        g.setGenre(genre);
-        g.setPrice(price);
-        g.setFranchises(new Franchises(fid));
+        g.setId(Read.Int("Game ID: "));
+        g.setName(Read.String("Name: "));
+        g.setGenre(Read.String("Genre: "));
+        g.setPrice(Read.Float("Price: "));
+        g.setFranchises(new Franchises(Read.Int("Franchise ID: ")));
         s.save(g);
         t.commit();
 
@@ -132,9 +135,11 @@ public class Games implements java.io.Serializable {
         List results = q.list();
         Iterator iterator = results.iterator();
         System.out.println("NAME\t|\t GENRE\t|\t PRICE\t|\t FRANCHISE\t\t |");
+        System.out.println("-------------------------------------------------");
         while (iterator.hasNext()) {
             Games game = (Games) iterator.next();
             System.out.println(game.getName() + "\t\t" + game.getGenre() + "\t\t" + game.getFranchises().getName());
+            System.out.println("----");
 
         }
     }
