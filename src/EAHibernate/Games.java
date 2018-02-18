@@ -49,13 +49,13 @@ public class Games implements java.io.Serializable {
         this.saleses = saleses;
     }
 
-    public Games(int id,String name) {
+    public Games(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
     public Games(Integer id) {
-        this.id=id;
+        this.id = id;
     }
 
     public Integer getId() {
@@ -129,6 +129,8 @@ public class Games implements java.io.Serializable {
         g.setFranchises(new Franchises(Read.Int("Franchise ID: ")));
         s.save(g);
         t.commit();
+        s.close();
+
 
     }
 
@@ -141,11 +143,18 @@ public class Games implements java.io.Serializable {
         System.out.println("NAME\t|\t GENRE\t|\t PRICE\t|\t FRANCHISE\t\t |");
         System.out.println("-------------------------------------------------");
         while (iterator.hasNext()) {
+            String fran = "";
             Games game = (Games) iterator.next();
-            System.out.println(game.getName() + "\t\t" + game.getGenre() + "\t\t" + game.getFranchises().getName());
+            try {
+                 fran = game.getFranchises().getName();
+            } catch (Exception ignored) {
+
+            }
+            System.out.println(game.getName() + "\t\t" + game.getGenre() + "\t\t" + fran);
             System.out.println("----");
 
         }
+        s.close();
     }
 
     public static void updateGames() {
@@ -163,7 +172,6 @@ public class Games implements java.io.Serializable {
         s.update(g);
         t.commit();
         s.close();
-        sf.close();
     }
 
     public static void deleteGames() {
@@ -171,7 +179,7 @@ public class Games implements java.io.Serializable {
         Session s = sf.openSession();
         Transaction t = s.beginTransaction();
         int id = Read.Int("Type the ID of the game to be deleted: ");
-        Query q = s.createQuery("from Games where id =" +id);
+        Query q = s.createQuery("from Games where id =" + id);
         List results = q.list();
         Iterator iterator = results.iterator();
         Games g = (Games) iterator.next();

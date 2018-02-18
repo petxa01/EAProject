@@ -1,3 +1,4 @@
+import EA.Read;
 import org.hibernate.HibernateException;
 import org.hibernate.Metamodel;
 import org.hibernate.query.Query;
@@ -10,38 +11,17 @@ import javax.persistence.metamodel.EntityType;
 import java.util.Map;
 
 public class Main {
-    private static final SessionFactory ourSessionFactory;
 
-    static {
-        try {
-            Configuration configuration = new Configuration();
-            configuration.configure();
+    public static void main(String[] args) throws Exception {
+        System.out.println("Do you want to work with:");
+        System.out.println("\t\t [0] JDBC");
+        System.out.println("\t\t [1] Hibernate");
+        int i = Read.Int("");
 
-            ourSessionFactory = configuration.buildSessionFactory();
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
-    public static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
-    }
-
-    public static void main(final String[] args) throws Exception {
-        final Session session = getSession();
-        try {
-            System.out.println("querying all the managed entities...");
-            final Metamodel metamodel = session.getSessionFactory().getMetamodel();
-            for (EntityType<?> entityType : metamodel.getEntities()) {
-                final String entityName = entityType.getName();
-                final Query query = session.createQuery("from " + entityName);
-                System.out.println("executing: " + query.getQueryString());
-                for (Object o : query.list()) {
-                    System.out.println("  " + o);
-                }
-            }
-        } finally {
-            session.close();
+        if (i == 0) {
+            EA.Main.main(args);
+        } else {
+            EAHibernate.Main.main(args);
         }
     }
 }

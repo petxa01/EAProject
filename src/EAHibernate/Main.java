@@ -5,11 +5,12 @@ import EA.Read;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static EA.DBtools.select;
 import static EA.Tools.cls;
+import static EAHibernate.Franchises.*;
 import static EAHibernate.Games.*;
-import static EAHibernate.Studios.deleteStudios;
-import static EAHibernate.Studios.insertStudio;
-import static EAHibernate.Studios.updateStudios;
+import static EAHibernate.Sales.*;
+import static EAHibernate.Studios.*;
 
 public class Main {
     public static void main(final String[] args) throws IOException {
@@ -66,8 +67,10 @@ public class Main {
                                 break;
                             case 0:
                                 repeatSub = false;
+                                break;
                         }
                     } while (repeatSub);
+                    break;
                 case 2:
                     //Franchises
                     do {
@@ -80,42 +83,34 @@ public class Main {
                         System.out.println("+        [2] Add Franchise        +");
                         System.out.println("+      [3] Delete Franchise       +");
                         System.out.println("+---------------------------------+");
-                        System.out.println("+    [4] Add Game to Franchise    +");
-                        System.out.println("+  [5] Delete Game from Franchise +");
-                        System.out.println("+---------------------------------+");
-                        System.out.println("+       [6] Edit Franchise        +");
+                        System.out.println("+       [4] Edit Franchise        +");
                         System.out.println("+---------------------------------+");
                         System.out.println("+            [0] Back             +");
                         chooser = Read.Int("+++++++++++++++++++++++++++++++++++");
                         switch (chooser) {
                             case 1:
-                                franchises = select("Franchises");
-                                System.out.println("FRANCHISE LIST:");
-                                System.out.println("``````````````````````````");
-                                printFranchise(franchises);
+                                printFranchises();
                                 Read.Pause();
                                 break;
                             case 2:
                                 insertFranchise();
+                                Read.Pause();
                                 break;
                             case 3:
-                                deleteFranchise();
+                                deleteFranchises();
+                                Read.Pause();
                                 break;
                             case 4:
-                                addGame();
-                                break;
-                            case 5:
-                                deleteGameF();
-                                break;
-                            case 6:
-                                updateFranchise();
+                                updateFranchises();
+                                Read.Pause();
                                 break;
                             case 0:
                                 repeatSub = false;
                                 break;
                         }
-                        break;
+
                     } while (repeatSub);
+                    break;
 
                 case 3:
                     //Studios
@@ -135,7 +130,7 @@ public class Main {
                         chooser = Read.Int("++++++++++++++++++++++++++++++++++++");
                         switch (chooser) {
                             case 1:
-                                insertStudio();
+                                printStudios();
                                 Read.Pause();
                                 break;
                             case 2:
@@ -159,7 +154,7 @@ public class Main {
 
 
                 case 4:
-                    //Studios
+                    //Sales
                     do {
                         repeatSub = true;
                         cls();
@@ -176,19 +171,19 @@ public class Main {
                         chooser = Read.Int("++++++++++++++++++++++++++++++++++++");
                         switch (chooser) {
                             case 1:
-                                insertStudio();
+                                printSales();
                                 Read.Pause();
                                 break;
                             case 2:
-                                insertStudio();
+                                insertSale();
                                 Read.Pause();
                                 break;
                             case 3:
-                                deleteStudios();
+                                deleteSales();
                                 Read.Pause();
                                 break;
                             case 4:
-                                updateStudios();
+                                updateSales();
                                 Read.Pause();
                                 break;
                             case 0:
@@ -197,7 +192,9 @@ public class Main {
                         }
                     } while (repeatSub);
                     break;
-
+                default:
+                    repeatAll = false;
+                    break;
             }
         } while (repeatAll);
 

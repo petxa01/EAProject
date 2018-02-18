@@ -42,7 +42,11 @@ public class Studios  implements java.io.Serializable {
        this.country = country;
        this.franchiseses = franchiseses;
     }
-   
+
+    public Studios(int anInt) {
+        id = anInt;
+    }
+
     public Integer getId() {
         return this.id;
     }
@@ -93,6 +97,8 @@ public class Studios  implements java.io.Serializable {
 
         s.save(st);
         t.commit();
+        s.close();
+
 
     }
 
@@ -110,6 +116,8 @@ public class Studios  implements java.io.Serializable {
             System.out.println("----");
 
         }
+        s.close();
+
     }
 
     public static void updateStudios() {
@@ -126,7 +134,7 @@ public class Studios  implements java.io.Serializable {
         s.update(st);
         t.commit();
         s.close();
-        sf.close();
+
     }
 
     public static void deleteStudios() {
@@ -141,6 +149,7 @@ public class Studios  implements java.io.Serializable {
         s.delete(st);
         t.commit();
         s.close();
+
     }
 
 
