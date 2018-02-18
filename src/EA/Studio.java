@@ -50,87 +50,98 @@ public class Studio {
         return returnObjectList(objectList, exist);
     }
 
-    public static void insertStudios(String table) {
+    public static void insertStudios() {
         String name = Read.String("Enter the name");
         String country = Read.String("Enter the country");
         int divisionId;
         boolean repeat;
         do {
-            divisionId = Read.Int("Type the divison of the studio:");
-            ArrayList<Object> division = select("Divisions", "Name LIKE '%" + divisionId + "%'");
-            if (division.size() > 1) {
-                System.out.println(division.size() + " divisions found:");
-                printDivision(division);
-                System.out.println("please specify more");
-                repeat=true;
-            } else if(division.size()<1) {
-                System.out.println("No divisons found try again");
-                repeat=true;
-            }else {
-                repeat = false;
-                Division d = (Division) division.get(0);
-                divisionId=d.getId();
-            }
-        }while(repeat);
+            String n = Read.String("Type the divison name  of the studio: ");
+            ArrayList<Object> division = select("Divisions", "Name LIKE '%" + n + "%'");
+            if (division != null) {
+                if (division.size() > 1) {
+                    System.out.println(division.size() + " divisions found:");
+                    System.out.println("please specify more");
+                    repeat = true;
+                } else {
+                    repeat = false;
+                    Division d = (Division) division.get(0);
+                    divisionId = d.getId();
+                    sqlStmt("Insert into Studios (Name,Country,DivisionId) VALUES ('" + name + "','" + country + "'," + divisionId + ")", false);
 
-        sqlStmt("Insert into " + table + " (Name,Country,DivisionId) VALUES (" + name + "," + country + "," + divisionId + ")", false);
+                }
+
+            } else {
+                System.out.println("No divisions found");
+                repeat = false;
+            }
+        } while (repeat);
+
     }
 
-    public static void deleteStudio(){
+    public static void deleteStudio() {
         boolean repeat;
         int studioId;
+        ArrayList<Object> studio = null;
         do {
-            studioId = Read.Int("Type the studio to delete:");
-            ArrayList<Object> studio = select("Studios", "Name LIKE '%" + studioId + "%'");
-            if (studio.size() > 1) {
-                System.out.println(studio.size() + " studios found:");
-                printStudio(studio);
-                System.out.println("please specify more");
-                repeat=true;
-            } else if(studio.size()<1) {
-                System.out.println("No studios found try again");
-                repeat=true;
-            }else {
+            String n = Read.String("Type the studio to delete:");
+            studio = select("Studios", "Name LIKE '%" + n + "%'");
+            if (studio != null) {
+                if (studio.size() > 1) {
+                    System.out.println(studio.size() + " studios found:");
+                    System.out.println("please specify more");
+                    repeat = true;
+                } else {
+                    repeat = false;
+                    Studio s = (Studio) studio.get(0);
+                    studioId = s.getId();
+                    sqlStmt("delete from studios where id=" + studioId, false);
+
+                }
+
+            } else {
+                System.out.println("No Studios found, try again");
                 repeat = false;
-                Studio s = (Studio) studio.get(0);
-                studioId=s.getId();
             }
-        }while(repeat);
-        sqlStmt("delete from studios where id="+studioId,false);
+        } while (repeat);
     }
 
     public static void printStudio(ArrayList<Object> studios) {
-        for (Object g : studios) {
-            Studio studio = (Studio) g;
+        for (Object s : studios) {
+            Studio studio = (Studio) s;
             System.out.println("Name: " + studio.getName());
             System.out.println("Country: " + studio.getCountry());
-            Division d = (Division) select("Division", "Id = " + studio.getDivisionId()).get(0);
+            Division d = (Division) select("Divisions", "Id = " + studio.getDivisionId()).get(0);
             System.out.println("Division: " + d.getName());
             System.out.println("``````````````````````````");
 
         }
+
     }
 
     public static void updateStudios() {
         boolean repeat = false;
         int studioId = 0;
+        ArrayList<Object> studios = null;
         String value = "";
         do {
             do {
                 String name = Read.String("Type the name of the studio:");
-                ArrayList<Object> studios = select("studios", "IdCard LIKE '%" + name + "%'");
-                if (studios.size() > 1) {
-                    System.out.println(studios.size() + " clients found:");
-                    printGame(studios);
-                    System.out.println("please specify more");
+                studios = select("studios", "Name LIKE '%" + name + "%'");
+                if (studios!=null) {
+                    if (studios.size() > 1){
+                        System.out.println(studios.size() + " studios found:");
+                        System.out.println("please specify more");
+                        repeat = true;
+                    }else{
+                        repeat = false;
+                        Studio c = (Studio) studios.get(0);
+                        studioId = c.getId();
+                    }
+
+                }else {
+                    System.out.println("No studios found try again");
                     repeat = true;
-                } else if (studios.size() < 1) {
-                    System.out.println("No clients found try again");
-                    repeat = true;
-                } else {
-                    repeat = false;
-                    Studio c = (Studio) studios.get(0);
-                    studioId = c.getId();
 
                 }
             } while (repeat);

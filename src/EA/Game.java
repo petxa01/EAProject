@@ -42,8 +42,8 @@ public class Game {
                         Integer.parseInt(res.getString(1)),
                         res.getString(2),
                         res.getString(3),
-                        Float.parseFloat(res.getString(4)),
-                        Integer.parseInt(res.getString(5))
+                        res.getFloat(4),
+                        res.getInt(5)
                 );
                 objectList.add(game);
 
@@ -132,22 +132,22 @@ public class Game {
 
                 }
             } while (repeat);
-            System.out.println("Enter what field you wish to change");
+            System.out.println("Enter which field you wish to change");
             System.out.println("+            [1] Name             +");
             System.out.println("+            [2] Genre             +");
             int option = Read.Int("+           [3] Price           +");
             switch (option) {
                 case 1:
                     value = Read.String("Enter the new name");
-                    update("Studios", "Name", value, "id=" + g.getId());
+                    update("games", "Name", value, "Id=" + gameId);
                     break;
                 case 2:
                     value = Read.String("Enter the new genre");
-                    update("Studios", "genre", value, "id=" + g.getId());
+                    update("games", "genre", value, "Id=" + gameId);
                     break;
                 case 3:
                     value = Read.String("Enter the new price");
-                    update("Studios", "price", value, "id=" + g.getId());
+                    update("games", "price", value, "Id=" + gameId);
                     break;
                 default:
                     System.out.println("You have to enter a valid number");
@@ -192,8 +192,13 @@ public class Game {
             System.out.println("Name: " + game.getName());
             System.out.println("Genre: " + game.getGenre());
             System.out.println("Price: " + game.getPrice());
-            Franchise f = (Franchise) select("Franchises", "Id = " + game.getFranchiseId()).get(0);
-            System.out.println("Franchise: " + f.getName());
+            try {
+                Franchise f = (Franchise) select("Franchises", "Id = " + game.getFranchiseId()).get(0);
+                System.out.println("Franchise: " + f.getName());
+            }catch (NullPointerException ignored){
+
+            }
+
             System.out.println("``````````````````````````");
 
         }

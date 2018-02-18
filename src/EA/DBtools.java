@@ -92,7 +92,7 @@ public class DBtools {
      * @param condition  WHERE condition
      */
     public static void update(String table, String columnName, String value, String condition) {
-        sqlStmt("UPDATE " + table + " SET " + columnName + " = " + value + " WHERE " + condition, false);
+        sqlStmt("UPDATE " + table + " SET " + columnName + " = '" + value + "' WHERE " + condition, false);
     }
 
     /**

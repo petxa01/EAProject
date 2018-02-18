@@ -7,15 +7,13 @@ import static EA.Client.*;
 import static EA.DBtools.delete;
 import static EA.DBtools.select;
 import static EA.Developer.*;
-import static EA.Division.deleteDivision;
-import static EA.Division.insertDivisions;
-import static EA.Division.printDivision;
+import static EA.Division.*;
 import static EA.Franchise.*;
 import static EA.Game.deleteGame;
 import static EA.Game.printGame;
+import static EA.Game.updateGame;
 import static EA.Sale.printSales;
-import static EA.Studio.insertStudios;
-import static EA.Studio.printStudio;
+import static EA.Studio.*;
 import static EA.Tools.cls;
 
 public class Main {
@@ -78,7 +76,7 @@ public class Main {
                                 System.out.println("Searching for a game...");
                                 String gameName = Read.String("Type the name of the game:");
                                 games = select("Games", "Name LIKE '%" + gameName + "%'");
-                                if (games.size() != 0) {
+                                if (games != null) {
                                     System.out.println(games.size() + " games found:");
                                     printGame(games);
                                 } else {
@@ -88,13 +86,15 @@ public class Main {
                                 break;
                             case 3:
                                 deleteGame();
+                                break;
                             case 4:
-                                //TODO: Añadir update
+                                updateGame();
+                                break;
                             case 0:
                                 repeatSub = false;
                                 break;
                         }
-                        break;
+
                     } while (repeatSub);
                     break;
                 case 2:
@@ -143,8 +143,9 @@ public class Main {
                                 repeatSub = false;
                                 break;
                         }
-                        break;
+
                     } while (repeatSub);
+                    break;
                 case 3:
                     //Studios
                     do {
@@ -157,10 +158,7 @@ public class Main {
                         System.out.println("+         [2] Add Studio           +");
                         System.out.println("+       [3] Delete Studio          +");
                         System.out.println("+----------------------------------+");
-                        System.out.println("+   [4] Add Franchise to Studio    +");
-                        System.out.println("+ [5] Delete Franchise from Studio +");
-                        System.out.println("+----------------------------------+");
-                        System.out.println("+        [6] Edit Studio           +");
+                        System.out.println("+        [4] Edit Studio           +");
                         System.out.println("+----------------------------------+");
                         System.out.println("+            [0] Back              +");
                         chooser = Read.Int("++++++++++++++++++++++++++++++++++++");
@@ -173,14 +171,19 @@ public class Main {
                                 Read.Pause();
                                 break;
                             case 2:
-                                insertStudios("Studio");
+                                insertStudios();
                                 break;
                             case 3:
+                                deleteStudio();
+                                break;
+                            case 4:
+                                updateStudios();
+                                break;
                             case 0:
                                 repeatSub = false;
                                 break;
                         }
-                        break;
+
                     } while (repeatSub);
                     break;
 
@@ -195,11 +198,6 @@ public class Main {
                         System.out.println("+         [2] Add Developer           +");
                         System.out.println("+       [3] Delete Developer          +");
                         System.out.println("+        [4] Edit Developer           +");
-                        System.out.println("+-------------------------------------+");
-                        System.out.println("+        [5] Add Game to Dev          +");
-                        System.out.println("+     [6] Remove Game from Dev        +");
-                        System.out.println("+-------------------------------------+");
-                        System.out.println("+   [7] List of Developing Games      +");
                         System.out.println("+-------------------------------------+");
                         System.out.println("+            [0] Back                 +");
                         chooser = Read.Int("+++++++++++++++++++++++++++++++++++++++");
@@ -224,7 +222,7 @@ public class Main {
                             case 0:
                                 repeatSub = false;
                                 break;
-                            //TODO: El resto
+
                         }
                     } while (repeatSub);
                     break;
@@ -262,7 +260,7 @@ public class Main {
                                 repeatSub = false;
                                 break;
                         }
-                        break;
+
                     } while (repeatSub);
                     break;
                 case 6:
@@ -294,15 +292,18 @@ public class Main {
                                 deleteDivision();
                                 break;
                             case 4:
-                                break;//TODO:Update
+                                updateDivision();
+                                break;
                             case 0:
                                 repeatAll = false;
                                 break;
                         }
                     } while (repeatSub);
+                    break;
                 case 7:
                     printSales();
                 default://Switch general
+                    repeatAll = false;
                     break;
             }
         } while (repeatAll);

@@ -21,7 +21,7 @@ public class Client {
 
     }
 
-    public Client(int id, String name,String category, String idCard) {
+    public Client(int id, String name, String category, String idCard) {
         this.id = id;
         this.idCard = idCard;
         this.name = name;
@@ -56,84 +56,96 @@ public class Client {
         }
         return returnObjectList(objectList, exist);
     }
-    public static void insertClients(){
-        String idCard=Read.String("Enter the id card: ");
-        String name=Read.String("Enter the Client name: ");
-        String category=Read.String("Enter the client category: ");
 
-        sqlStmt("Insert into clients (Name, Category,IdCard) VALUES ("+name+","+category+","+idCard+")", false);
+    public static void insertClients() {
+        String idCard = Read.String("Enter the id card: ");
+        String name = Read.String("Enter the Client name: ");
+        String category = Read.String("Enter the client category: ");
+
+        sqlStmt("Insert into clients (Name, Category,IdCard) VALUES ('" + name + "','" + category + "','" + idCard + "')", false);
     }
 
-    public static void deleteClients(){
+    public static void deleteClients() {
         int clientId;
         boolean repeat;
+        ArrayList<Object> client = null;
         do {
-            clientId = Read.Int("Type the id card of the client you want to delete:");
-            ArrayList<Object> client = select("Clients", "IdCard LIKE '%" + clientId + "%'");
-            if (client.size() > 1) {
-                System.out.println(client.size() + " clients found:");
-                printClient(client);
-                System.out.println("please specify more");
-                repeat = true;
-            } else if (client.size() < 1) {
+            String n = Read.String("Type the id card of the client you want to delete: ");
+            client = select("Clients", "IdCard LIKE '%" + n + "%'");
+            if (client != null) {
+                if (client.size() > 1) {
+                    System.out.println(client.size() + " clients found:");
+                    printClient(client);
+                    System.out.println("please specify more");
+                    repeat = true;
+                } else {
+                    repeat = false;
+                    Client c = (Client) client.get(0);
+                    clientId = c.getId();
+                    sqlStmt("delete from clients where id= " + clientId, false);
+
+                }
+
+            } else {
+
+
                 System.out.println("No Clients found try again");
                 repeat = true;
-            } else {
-                repeat = false;
-                Client c = (Client) client.get(0);
-                clientId = c.getId();
             }
         } while (repeat);
-        sqlStmt("delete from clients where id= "+ clientId,false);
 
     }
 
-    public static void updateClient(){
+    public static void updateClient() {
         boolean repeat;
         int clientId, menu;
         String column, value;
+        ArrayList<Object> clients = null;
         do {
-            clientId = Read.Int("Type the id card of the client you want to update:");
-            ArrayList<Object> developers = select("Clients", "IdCard LIKE '%" + clientId + "%'");
-            if (developers.size() > 1) {
-                System.out.println(developers.size() + " clients found:");
-                printGame(developers);
-                System.out.println("please specify more");
-                repeat = true;
-            } else if (developers.size() < 1) {
+            String n = Read.String("Type the id card of the client you want to update: ");
+            clients = select("Clients", "IdCard LIKE '%" + n + "%'");
+            if (clients != null) {
+                if (clients.size() > 1){
+                    System.out.println(clients.size() + " clients found:");
+                    printGame(clients);
+                    System.out.println("please specify more");
+                    repeat = true;
+                }else {
+                    repeat = false;
+                    Client c = (Client) clients.get(0);
+                    clientId = c.getId();
+
+                    do {
+                        System.out.println("Choose what do you want to change");
+                        System.out.println("1- Name");
+                        menu = Read.Int("2- Category");
+                    } while (menu < 1 || menu > 2);
+                    switch (menu) {
+                        case 1:
+                            column = "Name";
+                            break;
+                        case 2:
+                            column = "Category";
+                            break;
+                        default:
+                            column = "";
+                    }
+                    value = Read.String("Enter the new value");
+                    update("Clients", column, value, "id=" + clientId);
+                }
+            } else {
                 System.out.println("No clients found try again");
                 repeat = true;
-            } else {
-                repeat = false;
-                Developer d = (Developer) developers.get(0);
-                clientId = d.getId();
             }
         } while (repeat);
-        do {
-            System.out.println("Choose what do you want to change");
-            System.out.println("1- Name");
-            menu = Read.Int("2- Category");
-        }while(menu<1 || menu>2);
-        switch (menu){
-            case 1:
-                column="Name";
-                break;
-            case 2:
-                column="Category";
-                break;
-            default:
-                column="";
-        }
-        value=Read.String("Enter the new value");
-        update("Clients",column,value,"id="+clientId);
-
 
     }
-    public static void printClient(ArrayList<Object> clients){
+
+    public static void printClient(ArrayList<Object> clients) {
         for (Object f : clients) {
             Client client = (Client) f;
             System.out.println("Name: " + client.getName());
-            System.out.printf("Id Card: " + client.getIdCard());
+            System.out.printf("Id Card: " + client.getIdCard() + "\t");
             System.out.println("Category: " + client.getCategory());
 
             System.out.println("``````````````````````````");
