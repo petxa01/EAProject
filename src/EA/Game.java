@@ -1,6 +1,10 @@
 package EA;
 
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+
 import java.io.IOException;
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -8,7 +12,7 @@ import java.util.ArrayList;
 import static EA.DBtools.delete;
 import static EA.DBtools.select;
 import static EA.DBtools.update;
-import static EA.Division.printDivision;
+
 import static EA.Franchise.printFranchise;
 import static EA.Tools.returnObjectList;
 import static EA.Tools.sqlStmt;
@@ -204,6 +208,21 @@ public class Game {
         }
     }
 
+
+    public static void Procedure(int x) throws SQLException {
+        MysqlDataSource dataSource = new MysqlDataSource();
+        dataSource.setPort(3306);
+        dataSource.setUser("root");
+        dataSource.setPassword("root");
+        dataSource.setDatabaseName("ea");
+        dataSource.setServerName("127.0.0.1");
+        Connection conn = null;
+        CallableStatement cStmt = conn.prepareCall("{call get_sales(?, ?)}");
+
+
+
+        cStmt.setString(1, String.valueOf(x));
+    }
     public int getId() {
         return id;
     }

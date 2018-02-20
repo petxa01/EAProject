@@ -1,6 +1,7 @@
 package EA;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static EA.Client.*;
@@ -9,16 +10,14 @@ import static EA.DBtools.select;
 import static EA.Developer.*;
 import static EA.Division.*;
 import static EA.Franchise.*;
-import static EA.Game.deleteGame;
-import static EA.Game.printGame;
-import static EA.Game.updateGame;
+import static EA.Game.*;
 import static EA.Sale.printSales;
 import static EA.Studio.*;
 import static EA.Tools.cls;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException {
         // write your code here
         boolean repeatAll, repeatSub;
         int chooser;
@@ -56,6 +55,7 @@ public class Main {
                         System.out.println("+     [3] Delete Game     +");
                         System.out.println("+      [4] Edit Game      +");
                         System.out.println("+-------------------------+");
+                        System.out.println("+   [5] Game procedure    +");
                         System.out.println("+        [0] Back         +");
                         System.out.println("+-------------------------+");
                         System.out.println("+ To add a new game go to +");
@@ -89,6 +89,10 @@ public class Main {
                                 break;
                             case 4:
                                 updateGame();
+                                break;
+                            case 5:
+                                int x = Read.Int("How much would you like to add to the game price: ");
+                                Procedure(x);
                                 break;
                             case 0:
                                 repeatSub = false;
