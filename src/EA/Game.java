@@ -218,7 +218,7 @@ public class Game {
         dataSource.setServerName("127.0.0.1");
         Connection conn = null;
         conn = (Connection) dataSource.getConnection();
-        CallableStatement cStmt = conn.prepareCall("{call get_sales(?, ?)}");
+        CallableStatement cStmt = conn.prepareCall("{call rise_price(?, ?)}");
 
 
 
