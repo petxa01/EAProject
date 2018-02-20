@@ -209,7 +209,7 @@ public class Game {
     }
 
 
-    public static void Procedure(int x) throws SQLException {
+    public static void Procedure(int x, int y) throws SQLException {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setPort(3306);
         dataSource.setUser("root");
@@ -218,11 +218,13 @@ public class Game {
         dataSource.setServerName("127.0.0.1");
         Connection conn = null;
         conn = (Connection) dataSource.getConnection();
-        CallableStatement cStmt = conn.prepareCall("{call get_sales(?, ?)}");
+        CallableStatement cStmt = conn.prepareCall("{call rise_price(?, ?)}");
 
 
 
         cStmt.setString(1, String.valueOf(x));
+        cStmt.setString(2, String.valueOf(y));
+        cStmt.execute();
     }
     public int getId() {
         return id;

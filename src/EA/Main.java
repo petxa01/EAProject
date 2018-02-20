@@ -92,7 +92,8 @@ public class Main {
                                 break;
                             case 5:
                                 int x = Read.Int("How much would you like to add to the game price: ");
-                                Procedure(x);
+                                int y = Read.Int("Minimum price to be updated: ");
+                                Procedure(x,y);
                                 break;
                             case 0:
                                 repeatSub = false;
